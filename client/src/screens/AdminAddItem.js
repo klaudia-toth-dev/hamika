@@ -99,7 +99,7 @@ export default function AdminAddItem() {
           />
           <input
             type="text"
-            placeholder="image"
+            placeholder="imageURL"
             className="form-control"
             value={image}
             onChange={(e) => {
