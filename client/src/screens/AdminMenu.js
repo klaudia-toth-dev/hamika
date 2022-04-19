@@ -17,16 +17,16 @@ export default function AdminMenu() {
   }, []);
   return (
     <div>
-      <h1>Items List</h1>
+      {/* <h1>Items List</h1> */}
       {loading && <Loading />}
       {error && <Error error="Something went wrong" />}
-      <table className="table">
-        <thead className="thead-light">
+      <table className="table styled-table">
+        <thead>
           <tr>
-            <th>Name</th>
-            <th>Prices</th>
-            <th>Category</th>
-            <th>Actions</th>
+            <th className="name">Name</th>
+            <th className="prices">Prices</th>
+            <th className="category">Category</th>
+            <th className="actions">Actions</th>
           </tr>
         </thead>
         <tbody>

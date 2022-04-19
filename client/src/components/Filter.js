@@ -7,12 +7,12 @@ export default function Filter() {
   const [searchKey, setSearchKey] = useState("");
   const [category, setCategory] = useState("all");
   return (
-    <div className="container">
-      <div className="row justify-content-center shadow-lg p-3 mb-5 mt-5 bg-white rounded">
-        <div className="col-md-3 w-100">
+    <div className="container filter">
+      <div className="row justify-content-center shadow-lg filter-row">
+        <div className="col-md-5 w-100">
           <input
             type="text"
-            className="form-control w-100"
+            className="form-control w-100 filter-input search"
             value={searchKey}
             onChange={(e) => {
               setSearchKey(e.target.value);
@@ -22,7 +22,7 @@ export default function Filter() {
         </div>
         <div className="col-md-3 w-100">
           <select
-            className="form-control w-100 mt-2"
+            className="form-control w-100 filter-input"
             value={category}
             onChange={(e) => {
               setCategory(e.target.value);
@@ -35,7 +35,7 @@ export default function Filter() {
         </div>
         <div className="col-md-3 w-100">
           <button
-            className="btn w-100 mt-2"
+            className="btn w-100"
             onClick={() => {
               dispatch(filterItems(searchKey, category));
             }}

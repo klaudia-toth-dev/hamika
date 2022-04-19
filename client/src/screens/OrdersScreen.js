@@ -5,12 +5,18 @@ import Loading from "../components/Loading";
 import Error from "../components/Error";
 
 export default function OrdersScreen() {
+  const userState = useSelector((state) => state.loginUserReducer);
+  const { currentUser } = userState;
+
   const dispatch = useDispatch();
 
   const orderState = useSelector((state) => state.getUserOrdersReducer);
   const { orders, error, loading } = orderState;
 
   useEffect(() => {
+    if (currentUser && currentUser.isAdmin) {
+      window.location.href = "/admin";
+    }
     dispatch(getUserOrders());
   }, []);
   return (

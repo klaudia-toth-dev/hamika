@@ -21,12 +21,11 @@ export default function AdminScreen() {
     <div>
       {currentUser.isAdmin && (
         <div className="row justify-content-center">
-          <div className="col-md-10">
-            <h1>Admin Panel</h1>
+          <div className="col-md-12">
             <ul className="adminfunction">
-              {/* <li>
+              <li>
                 <a href="/admin/users">Users</a>
-              </li> */}
+              </li>
               <li>
                 <Link to={"/admin/menu"}>Menu</Link>
               </li>
@@ -37,14 +36,16 @@ export default function AdminScreen() {
                 <a href="/admin/orders">Orders</a>
               </li>
             </ul>
-            <Routes>
-              <Route path="/" element={<AdminMenu />} />
-              <Route path="/users" element={<AdminUsers />} />
-              <Route path="/menu" element={<AdminMenu />} />
-              <Route path="/additem" element={<AdminAddItem />} />
-              <Route path="/orders" element={<AdminOrders />} />
-              <Route path="/edititem/:id" element={<AdminEditItem />} />
-            </Routes>
+            <div className="admin-content">
+              <Routes>
+                <Route path="/" element={<AdminMenu />} />
+                <Route path="/users" element={<AdminUsers />} />
+                <Route path="/menu" element={<AdminMenu />} />
+                <Route path="/additem" element={<AdminAddItem />} />
+                <Route path="/orders" element={<AdminOrders />} />
+                <Route path="/edititem/:id" element={<AdminEditItem />} />
+              </Routes>
+            </div>
           </div>
         </div>
       )}

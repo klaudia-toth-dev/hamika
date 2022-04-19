@@ -16,7 +16,7 @@ export default function LoginScreen() {
 
   useEffect(() => {
     if (localStorage.getItem("currentUser")) {
-      window.location.href = "/";
+      window.location.href = "/menu";
     }
   }, []);
 

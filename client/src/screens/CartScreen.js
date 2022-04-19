@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../actions/cartActions";
 import { deleteFromCart } from "../actions/cartActions";
 import CheckOut from "../components/CheckOut";
 
 export default function CartScreen() {
+  const userState = useSelector((state) => state.loginUserReducer);
+  const { currentUser } = userState;
+
+  useEffect(() => {
+    if (currentUser && currentUser.isAdmin) {
+      window.location.href = "/admin";
+    }
+  }, []);
+
   const cartState = useSelector((state) => state.cartReducer);
   const cartItems = cartState.cartItems;
   var subtotal = cartItems.reduce((x, item) => x + item.price, 0);

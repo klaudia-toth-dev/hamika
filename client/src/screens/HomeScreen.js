@@ -8,11 +8,19 @@ import Error from "../components/Error";
 import Filter from "../components/Filter";
 
 export default function HomeScreen() {
+  const userState = useSelector((state) => state.loginUserReducer);
+  const { currentUser } = userState;
+
+  useEffect(() => {}, []);
+
   const dispatch = useDispatch();
   const itemsState = useSelector((state) => state.getAllItemsReducer);
   const { items, error, loading } = itemsState;
 
   useEffect(() => {
+    if (currentUser && currentUser.isAdmin) {
+      window.location.href = "/admin";
+    }
     dispatch(getAllItems());
   }, []);
 

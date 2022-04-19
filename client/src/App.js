@@ -4,6 +4,8 @@ import bootstrap from "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import LandingNavbar from "./components/LandingNavbar";
+import CFooter from "./components/CFooter";
 import Navbar from "./components/Navbar";
 import HomeScreen from "./screens/HomeScreen";
 import CartScreen from "./screens/CartScreen";
@@ -15,23 +17,26 @@ import ContactScreen from "./screens/ContactScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 
 function App() {
+  const pathname = window.location.pathname;
   return (
     <div className="App">
-      <Navbar />
-      <div className="container">
+      {pathname === "/" && <LandingNavbar />}
+      {pathname !== "/" && <Navbar />}
+      <div className="container app-content">
         <Router>
           <Routes>
-            <Route path="/welcome" element={<WelcomeScreen />} />
-            <Route path="/" element={<HomeScreen />} />
+            <Route path="/" element={<WelcomeScreen />} />
+            <Route path="/menu" element={<HomeScreen />} />
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/orders" element={<OrdersScreen />} />
             <Route path="/admin/*" element={<AdminScreen />} />
-            <Route path="/contact" element={<ContactScreen />} />
+            {/* <Route path="/contact" element={<ContactScreen />} /> */}
           </Routes>
         </Router>
       </div>
+      <CFooter />
     </div>
   );
 }

@@ -14,18 +14,20 @@ export default function AdminOrders() {
   }, []);
   return (
     <div>
-      <h1>Orders List</h1>
+      {/* <h1>Orders List</h1> */}
       {loading && <Loading />}
       {error && <Error error="something went wrong" />}
 
-      <table className="table">
-        <thead className="thead-light">
-          <th>Order Id</th>
-          <th>Email</th>
-          <th>User Id</th>
-          <th>Price</th>
-          <th>Date</th>
-          {/* <th>Status</th> */}
+      <table className="table styled-table">
+        <thead>
+          <tr>
+            <th>Order Id</th>
+            <th>Email</th>
+            <th>User Id</th>
+            <th>Price</th>
+            <th>Date</th>
+            {/* <th>Status</th> */}
+          </tr>
         </thead>
         <tbody>
           {orders &&
