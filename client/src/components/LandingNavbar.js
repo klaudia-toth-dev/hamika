@@ -118,6 +118,11 @@ export default function LandingNavbar() {
                 CONTACT
               </Link>
             </li>
+            <li className="nav-item mr-3">
+              <a className="nav-link" href="/menu">
+                ORDER ONLINE
+              </a>
+            </li>
             {/* <li className="nav-item mr-3">
               <Link
                 to="subscribe"

@@ -33,6 +33,12 @@ export default function AdminAddItem() {
     dispatch(addItem(item));
   }
 
+  function getImageUrl(e) {
+    console.log(e);
+    let fieldId = e.split("/");
+    setImage("https://drive.google.com/uc?export=view&id=" + fieldId[5]);
+  }
+
   return (
     <div>
       <div className="text-left">
@@ -103,7 +109,7 @@ export default function AdminAddItem() {
             className="form-control"
             value={image}
             onChange={(e) => {
-              setImage(e.target.value);
+              getImageUrl(e.target.value);
             }}
           />
           <button className="btn mt-3" type="submit">

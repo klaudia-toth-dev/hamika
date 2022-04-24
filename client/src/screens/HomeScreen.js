@@ -27,7 +27,7 @@ export default function HomeScreen() {
   return (
     <div>
       <Filter />
-      <div className="row justify-content-center">
+      <div className="row justify-content-left">
         {loading && <Loading />}
         {error && <Error error="Something went wrong" />}
         {items &&

@@ -68,6 +68,7 @@ a:hover{
   padding: 1rem 3rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
+  transition: all 0.5s ease-in-out !important;
 }
 .btn:hover{
   background-color:rgb(245, 233, 216) !important;
@@ -153,6 +154,7 @@ tr {
 .navbar a{
   color:rgb(163, 145, 118);
   font-weight: 600;
+  transition: all 0.5s ease-in-out;
 }
 .navbar a:hover{
   color:rgb(245, 233, 216);
@@ -255,7 +257,7 @@ tr {
   
 .welcomeScreen .home-section .homeDiv .btn:hover{
   background-color:rgb(245, 233, 216) !important;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .welcomeScreen
@@ -392,7 +394,14 @@ tr {
 }
 .item-card .item-card-content{
   padding: 1.5rem;
-  
+  min-height: 14rem;
+  position: relative;
+}
+
+.item-card-price{
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
 }
 
 .item-card .item-card-content h3{

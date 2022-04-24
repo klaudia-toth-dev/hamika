@@ -9,8 +9,6 @@ const db = require("./db.js");
 //client
 // const path = require("path");
 
-// console.log(process.env);
-
 app.use(express.json());
 
 //client

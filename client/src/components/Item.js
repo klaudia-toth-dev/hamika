@@ -29,7 +29,7 @@ export default function Item({ item }) {
         <div className="item-card-content">
           <h3>{item.name}</h3>
           <p>{item.description}</p>
-          <p>{item.prices[0][portion]} HUF</p>
+          <p className="item-card-price">{item.prices[0][portion]} HUF</p>
         </div>
       </div>
 
@@ -60,8 +60,12 @@ export default function Item({ item }) {
                     setPortion(e.target.value);
                   }}
                 >
-                  {item.portions.map((portion) => {
-                    return <option value={portion}>{portion}</option>;
+                  {item.portions.map((portion, index) => {
+                    return (
+                      <option value={portion} key={index}>
+                        {portion}
+                      </option>
+                    );
                   })}
                 </select>
               </div>
@@ -74,7 +78,11 @@ export default function Item({ item }) {
                   }}
                 >
                   {[...Array(10).keys()].map((x, i) => {
-                    return <option value={i + 1}>{i + 1}</option>;
+                    return (
+                      <option value={i + 1} key={i}>
+                        {i + 1}
+                      </option>
+                    );
                   })}
                 </select>
               </div>
