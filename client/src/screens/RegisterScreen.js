@@ -32,14 +32,14 @@ export default function RegisterScreen() {
 
   return (
     <div>
-      <div className="row justify-content-center mt-5">
-        <div className="col-md-5 mt-5 text-left shadow-lg p-3 mb-5 bg-white rounded">
+      <div className="row justify-content-center auth-content">
+        <div className="text-left shadow-lg auth-card rounded">
           {loading && <Loading />}
           {success && <Success success="User registered successfully" />}
           {error && <Error error="Email already registered" />}
 
           <h1 className="m-2">REGISTER</h1>
-          <div>
+          <div className="auth-fields">
             <input
               type="text"
               placeholder="name"

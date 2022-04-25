@@ -33,13 +33,38 @@ export default function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto justify-content-end">
+            {!currentUser && cartState.cartItems.length > 0 && (
+              <li className="nav-item mr-3">
+                <a className="nav-link" href="/cart">
+                  <b>Cart </b>
+                  <span className="cart-items-num">
+                    {cartState.cartItems.length}
+                  </span>
+                </a>
+              </li>
+            )}
+            {currentUser &&
+              !currentUser.isAdmin &&
+              cartState.cartItems.length > 0 && (
+                <li className="nav-item mt-2 mr-3">
+                  <a className="nav-link" href="/cart">
+                    <b>Cart </b>
+
+                    {cartState.cartItems.length > 0 && (
+                      <span className="cart-items-num">
+                        {cartState.cartItems.length}
+                      </span>
+                    )}
+                  </a>
+                </li>
+              )}
             {currentUser && currentUser.isAdmin && (
               <li className="nav-item mt-2 mr-3">
                 <b>{currentUser.name} </b>
               </li>
             )}
             {currentUser && !currentUser.isAdmin && (
-              <div className="dropdown mr-3">
+              <div className="dropdown">
                 <button
                   className="dropdown-toggle btn profile-button"
                   type="button"
@@ -86,32 +111,6 @@ export default function Navbar() {
               <li className="nav-item">
                 <a className="nav-link" href="/login">
                   <b>Login</b>
-                </a>
-              </li>
-            )}
-            {!currentUser && (
-              <li className="nav-item">
-                <a className="nav-link" href="/cart">
-                  <b>Cart </b>
-
-                  {cartState.cartItems.length > 0 && (
-                    <span className="cart-items-num">
-                      {cartState.cartItems.length}
-                    </span>
-                  )}
-                </a>
-              </li>
-            )}
-            {currentUser && !currentUser.isAdmin && (
-              <li className="nav-item mt-2">
-                <a className="nav-link" href="/cart">
-                  <b>Cart </b>
-
-                  {cartState.cartItems.length > 0 && (
-                    <span className="cart-items-num">
-                      {cartState.cartItems.length}
-                    </span>
-                  )}
                 </a>
               </li>
             )}

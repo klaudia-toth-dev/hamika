@@ -29,7 +29,6 @@ export default function AdminAddItem() {
       prices: { small: smallprice, medium: mediumprice, large: largeprice },
     };
 
-    console.log(item);
     dispatch(addItem(item));
   }
 
@@ -40,14 +39,13 @@ export default function AdminAddItem() {
   }
 
   return (
-    <div>
+    <div className="admin-edit-item-card  shadow-lg rounded">
       <div className="text-left">
         <h1>Add Item</h1>
 
         {loading && <Loading />}
         {success && <Success success="New item added successfully" />}
         {error && <Error error="Something went wrong" />}
-
         <form onSubmit={formHandler}>
           <input
             type="text"

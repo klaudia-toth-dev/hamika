@@ -23,6 +23,7 @@ export default function CheckOut({ subtotal }) {
 
       <StripeCheckout
         amount={subtotal * 100}
+        ComponentClass="div"
         shippingAddress
         billingAddress
         token={tokenHandler}

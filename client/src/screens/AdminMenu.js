@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllItems, deleteItem } from "../actions/itemActions";
 import { Link } from "react-router-dom";
 
-import Item from "../components/Item";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 
@@ -16,7 +15,7 @@ export default function AdminMenu() {
     dispatch(getAllItems());
   }, []);
   return (
-    <div>
+    <div className="admin-menu">
       {/* <h1>Items List</h1> */}
       {loading && <Loading />}
       {error && <Error error="Something went wrong" />}

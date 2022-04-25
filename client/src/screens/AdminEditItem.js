@@ -59,8 +59,8 @@ export default function AdminEditItem() {
   }
 
   return (
-    <div>
-      <h1>{id}</h1>
+    <div className="admin-edit-item-card shadow-lg rounded">
+      {/* <h1>{id}</h1> */}
 
       <div className="text-left">
         <h1>Edit Item</h1>

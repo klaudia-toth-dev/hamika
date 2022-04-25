@@ -30,13 +30,13 @@ export default function LoginScreen() {
 
   return (
     <div>
-      <div className="row justify-content-center mt-5">
-        <div className="col-md-5 mt-5 text-left shadow-lg p-3 mb-5 bg-white rounded">
+      <div className="row justify-content-center auth-content">
+        <div className="text-left shadow-lg auth-card rounded">
           <h1 className="m-2">LOGIN</h1>
           {loading && <Loading />}
           {error && <Error error="Invalid Creditentals" />}
 
-          <div>
+          <div className="auth-fields">
             <input
               type="text"
               placeholder="email"

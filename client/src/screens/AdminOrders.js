@@ -26,7 +26,7 @@ export default function AdminOrders() {
             <th>User Id</th>
             <th>Price</th>
             <th>Date</th>
-            <th>Status</th>
+            {/* <th>Status</th> */}
           </tr>
         </thead>
         <tbody>
@@ -39,7 +39,7 @@ export default function AdminOrders() {
                   <td>{order.userId}</td>
                   <td>{order.orderAmount}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>
+                  {/* <td>
                     {order.isDelivered ? (
                       <p>Delivered</p>
                     ) : (
@@ -52,7 +52,7 @@ export default function AdminOrders() {
                         Deliver
                       </button>
                     )}
-                  </td>
+                  </td> */}
                 </tr>
               );
             })}

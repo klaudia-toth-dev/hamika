@@ -20,18 +20,18 @@ export default function OrdersScreen() {
     dispatch(getUserOrders());
   }, []);
   return (
-    <div>
-      <h2>My Orders</h2>
+    <div className="order-screen">
+      <h1>My Orders</h1>
       <div className="row ">
         {loading && <Loading />}
         {error && <Error error="Something went wrong" />}
         {orders &&
           orders.map((order) => {
             return (
-              <div className="col-md-12 shadow-sm p-3 mb-5 rounded bg-white">
+              <div className="col-md-12 shadow-sm p-4 mb-5 rounded order-card">
                 <div className="flex-container w-100">
                   <div className="text-left w-100 m-1 ">
-                    <h2>Items</h2>
+                    <h3>Items</h3>
                     {order.orderItems.map((item) => {
                       return (
                         <div>
@@ -44,15 +44,17 @@ export default function OrdersScreen() {
                     })}
                   </div>
                   <div className="text-left w-100 m-1">
-                    <h2>Address</h2>
+                    <h3>Address</h3>
                     <p>Street: {order.shippingAddress.street}</p>
                     <p>City: {order.shippingAddress.city}</p>
                     <p>Country: {order.shippingAddress.country}</p>
                     <p>Zip: {order.shippingAddress.zip}</p>
                   </div>
                   <div className="text-left w-100 m-1">
-                    <h2>Order Info</h2>
-                    <p>Price: {order.orderAmount}</p>
+                    <h3>Order Info</h3>
+                    <p>
+                      <b>Price: {order.orderAmount}</b>
+                    </p>
                     <p>Date: {order.createdAt.substring(0, 10)}</p>
                     <p>Transaction Id: {order.transactionId}</p>
                     <p>Order Id: {order._id}</p>

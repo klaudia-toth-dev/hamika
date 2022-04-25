@@ -49,6 +49,7 @@ p{
 
 a{
   color:rgb(163, 145, 118) !important;
+  transition: all 0.5s ease-in-out;
 }
 
 a:hover{
@@ -81,22 +82,6 @@ select {
   box-shadow: none !important;
   border-color: black !important;
 }
-
-
-
-.fa-plus {
-  color: green;
-  margin: 5px;
-}
-
-.fa-minus {
-  color: red;
-  margin: 5px;
-}
-
-/* .fa-trash {
-  color: red;
-} */
 
 input {
   margin-top: 10px !important;
@@ -202,6 +187,14 @@ tr {
   margin-left: 0.25rem;
 }
 
+/* FORM  CONTROL */
+.form-control{
+  background-color:rgb(245, 233, 216) !important;
+  color: rgb(10,0,0) !important;
+}
+.form-control:focus{
+  border-color: rgb(245, 233, 216);
+}
 
 
 /* WELCOME */
@@ -504,6 +497,16 @@ tr {
 
 .admin-content{
   margin-top: 6rem;
+  justify-content: center;
+  display: flex;
+}
+
+.admin-menu{
+  min-width: 80%;
+}
+
+.admin-users{
+  min-width: 80%;
 }
 
 /* .admin-content table tbody{
@@ -568,4 +571,114 @@ tr {
 .styled-table tr:hover i:hover {
   color: rgb(245, 233, 216) !important;
   cursor: pointer;
+}
+
+.admin-edit-item-card{
+  background-color: rgb(35,35,35);
+  padding: 3rem;
+  width: 60%;
+}
+
+
+/* ORDERS SCREEN */
+.order-screen{
+  padding-top: 1.5rem;
+}
+.order-screen h1{
+  margin-bottom: 1.5rem;
+}
+.order-card{
+  background-color: rgb(35,35,35);
+}
+.order-card p{
+  margin-bottom: 0;
+}
+
+/* CART SCREEN */
+.cart-screen{
+  padding-top: 1.5rem;
+  color: rgb(163, 145, 118);
+  padding-left: 9rem;
+  padding-right: 9rem;
+}
+.cart-screen h1{
+  margin-bottom: 1.5rem;
+}
+.cart-card{
+  background-color: rgb(35,35,35);
+  max-height: 160px;
+}
+
+.cart-item-picture{
+  width: 20%;
+}
+.cart-item-picture img{
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+
+.cart-item-info{
+  width: 70%;
+}
+
+.cart-item-info p{
+  margin-bottom: 0;
+}
+
+.cart-item-action{
+  width: 10%;
+}
+
+.fa-plus {
+  color: rgb(163, 145, 118);
+  margin: 5px;
+  transition: all 0.5s ease-in-out;
+}
+
+.fa-plus:hover{
+  color: rgb(245, 233, 216) !important;
+  cursor: pointer;
+}
+
+.fa-minus {
+  color: rgb(163, 145, 118);
+  margin: 5px;
+  transition: all 0.5s ease-in-out;
+}
+
+.fa-minus:hover{
+  color: rgb(245, 233, 216) !important;
+  cursor: pointer;
+}
+.fa-trash {
+  color: rgb(163, 145, 118);
+  transition: all 0.5s ease-in-out;
+}
+
+.fa-trash:hover{
+  color: rgb(245, 233, 216) !important;
+  cursor: pointer;
+}
+
+.back-to-order-link:hover{
+  text-decoration: none !important;
+}
+
+/* AUTH SCREEN */
+.auth-content{
+  padding-top: 6rem;
+}
+.auth-card{
+  background: rgb(35,35,35);
+  padding: 3rem;
+  width: 50%;
+}
+
+.auth-card .auth-fields .form-control{
+  background-color:rgb(245, 233, 216) !important;
+  color: rgb(10,0,0) !important;
+}
+.auth-card .auth-fields .form-control:focus{
+  border-color: rgb(245, 233, 216);
 }
