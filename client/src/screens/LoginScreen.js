@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../actions/userActions";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+
+import { GoogleLogin } from "react-google-login";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -13,6 +16,7 @@ export default function LoginScreen() {
 
   console.log(loginState);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("currentUser")) {
@@ -27,6 +31,23 @@ export default function LoginScreen() {
     };
     dispatch(loginUser(user));
   }
+
+  const googleSuccess = async (res) => {
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+
+    try {
+      console.log(result, token, "action");
+      dispatch({ type: "AUTH", data: { result, token } });
+
+      navigate("/menu");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const googleFailure = () => {
+    console.log("Google Login was unsuccessful. Try again later.");
+  };
 
   return (
     <div>
@@ -56,10 +77,23 @@ export default function LoginScreen() {
             <button className="btn mt-3 mb-3" onClick={login}>
               LOGIN
             </button>
+            <GoogleLogin
+              clientId="1011835344650-bgr918ihmhlqn5g1hrhr46n9aluijhgh.apps.googleusercontent.com"
+              render={(renderProps) => (
+                <button
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  className="btn"
+                >
+                  Google Login
+                </button>
+              )}
+              onSuccess={googleSuccess}
+              onFailure={googleFailure}
+              cookiePolicy={"single_host_origin"}
+            />
             <br />
-            <a href="/register" style={{ color: "black" }}>
-              Click Here To Register
-            </a>
+            <a href="/register">Click Here To Register</a>
           </div>
         </div>
       </div>

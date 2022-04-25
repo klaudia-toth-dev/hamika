@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../actions/userActions";
-// import { Link } from "react-scroll";
-
+// import { useLocation } from "react-router-dom";
 export default function Navbar() {
   const cartState = useSelector((state) => state.cartReducer);
   const userState = useSelector((state) => state.loginUserReducer);
   const { currentUser } = userState;
 
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+
   const dispatch = useDispatch();
+  // const location = useLocation();
+
+  useEffect(() => {
+    const token = user?.token;
+
+    //JWT token
+
+    setUser(JSON.parse(localStorage.getItem("currentUser")));
+    console.log(user, "user - auth");
+    // console.log(user.result.name, "currentUser");
+  }, []);
 
   return (
     <div className="navbar-div sticky real-nav">
@@ -61,6 +73,7 @@ export default function Navbar() {
             {currentUser && currentUser.isAdmin && (
               <li className="nav-item mt-2 mr-3">
                 <b>{currentUser.name} </b>
+                {/* <b>{user && user.result.name} </b> */}
               </li>
             )}
             {currentUser && !currentUser.isAdmin && (
@@ -73,7 +86,8 @@ export default function Navbar() {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <b>{currentUser.name}</b>
+                  <b>{currentUser.name} </b>
+                  {/* <b>{user && user.result.name} </b> */}
                 </button>
                 <div
                   className="dropdown-menu"
