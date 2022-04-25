@@ -13,6 +13,8 @@ export default function OrdersScreen() {
   const orderState = useSelector((state) => state.getUserOrdersReducer);
   const { orders, error, loading } = orderState;
 
+  console.log(orderState.note, "note");
+
   useEffect(() => {
     if (currentUser && currentUser.isAdmin) {
       window.location.href = "/admin";
@@ -56,8 +58,8 @@ export default function OrdersScreen() {
                       <b>Price: {order.orderAmount}</b>
                     </p>
                     <p>Date: {order.createdAt.substring(0, 10)}</p>
-                    <p>Transaction Id: {order.transactionId}</p>
-                    <p>Order Id: {order._id}</p>
+                    {/* <p>Order Id: {order._id}</p> */}
+                    <p>{order.note && <span>Comment: {order.note}</span>}</p>
                   </div>
                 </div>
               </div>

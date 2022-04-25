@@ -5,14 +5,14 @@ import { placeOrder } from "../actions/orderActions";
 import Loading from "../components/Loading";
 import Success from "../components/Success";
 import Error from "../components/Error";
-export default function CheckOut({ subtotal }) {
+export default function CheckOut({ subtotal, note }) {
   const orderState = useSelector((state) => state.placeOrderReducer);
   const { loading, error, success } = orderState;
 
   const dispatch = useDispatch();
   function tokenHandler(token) {
     console.log(token);
-    dispatch(placeOrder(token, subtotal));
+    dispatch(placeOrder(token, subtotal, note));
   }
   console.log(subtotal);
   return (

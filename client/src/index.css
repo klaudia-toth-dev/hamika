@@ -630,6 +630,16 @@ tr {
   width: 10%;
 }
 
+.cart-screen textarea.form-control{
+  min-height: 90px;
+  background-color: rgb(35,35,35) !important;
+  border: none;
+  color: rgb(245, 233, 216) !important;
+}
+.cart-screen textarea.form-control::placeholder{
+  color: rgb(163, 145, 118) !important;
+}
+
 .fa-plus {
   color: rgb(163, 145, 118);
   margin: 5px;
