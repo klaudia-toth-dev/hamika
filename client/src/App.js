@@ -13,8 +13,8 @@ import RegisterScreen from "./screens/RegisterScreen";
 import LoginScreen from "./screens/LoginScreen";
 import OrdersScreen from "./screens/OrdersScreen";
 import AdminScreen from "./screens/AdminScreen";
-import ContactScreen from "./screens/ContactScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
+import Auth from "./screens/Auth";
 
 function App() {
   const pathname = window.location.pathname;
@@ -32,7 +32,7 @@ function App() {
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/orders" element={<OrdersScreen />} />
             <Route path="/admin/*" element={<AdminScreen />} />
-            {/* <Route path="/contact" element={<ContactScreen />} /> */}
+            <Route path="/auth" element={<Auth />} />
           </Routes>
         </Router>
       </div>

@@ -8,6 +8,8 @@ export default function Navbar() {
   const userState = useSelector((state) => state.loginUserReducer);
   const { currentUser } = userState;
 
+  const user = null;
+
   const dispatch = useDispatch();
 
   return (
@@ -32,6 +34,21 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
+          {user ? (
+            <div>
+              <div>{user.result.name}</div>
+              <a className="dropdown-item" href="/">
+                Sign out
+              </a>
+            </div>
+          ) : (
+            <div>
+              <div> no user</div>
+              <a className="nav-link" href="/auth">
+                <b>Sign in</b>
+              </a>
+            </div>
+          )}
           <ul className="navbar-nav ms-auto justify-content-end">
             {!currentUser && cartState.cartItems.length > 0 && (
               <li className="nav-item mr-3">

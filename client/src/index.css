@@ -47,16 +47,21 @@ p{
   color:rgb(245, 233, 216);
 }
 
-a{
+a, .link{
   color:rgb(163, 145, 118) !important;
   transition: all 0.5s ease-in-out;
+  background-color: transparent !important;
+  border: none !important;
 }
 
-a:hover{
+a:hover, .link:hover{
   color:rgb(245, 233, 216) !important;
   text-decoration: overline !important;
+  cursor: pointer !important;
 }
-
+a:focus, .link:focus{
+  outline: none !important;
+}
 
 
 .flex-container {
