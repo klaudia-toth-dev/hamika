@@ -5,7 +5,7 @@ import { deleteFromCart } from "../actions/cartActions";
 import CheckOut from "../components/CheckOut";
 
 export default function CartScreen() {
-  const userState = useSelector((state) => state.loginUserReducer);
+  const userState = useSelector((state) => state.authReducer);
   const { currentUser } = userState;
 
   const [note, setNote] = useState("");

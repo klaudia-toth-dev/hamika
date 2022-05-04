@@ -6,7 +6,7 @@ import welcomeImg2 from "../static/welcome2.jpg";
 import Map from "../components/Map";
 
 export default function WelcomeScreen() {
-  const userState = useSelector((state) => state.loginUserReducer);
+  const userState = useSelector((state) => state.authReducer);
   const { currentUser } = userState;
 
   useEffect(() => {

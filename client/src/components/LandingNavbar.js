@@ -14,7 +14,7 @@ export default function LandingNavbar() {
   }
 
   return (
-    <div className="navbar-div sticky">
+    <div className="navbar-div fixed-nav">
       <nav className="navbar navbar-expand-lg">
         <a className="navbar-brand" href="/">
           <b>HAMIKA</b>

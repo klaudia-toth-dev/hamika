@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../middleware/auth");
 const Item = require("../models/itemModel");
 
 router.get("/getallitems", async (req, res) => {
@@ -12,8 +13,9 @@ router.get("/getallitems", async (req, res) => {
   }
 });
 
-router.post("/additem", async (req, res) => {
+router.post("/additem", auth, async (req, res) => {
   const item = req.body.item;
+  console.log(req.userId, "user");
   try {
     const newItem = new Item({
       name: item.name,
@@ -31,7 +33,7 @@ router.post("/additem", async (req, res) => {
   }
 });
 
-router.post("/edititem", async (req, res) => {
+router.post("/edititem", auth, async (req, res) => {
   const editedItem = req.body.editedItem;
   try {
     const item = await Item.findOne({ _id: editedItem._id });
@@ -59,7 +61,7 @@ router.post("/getitembyid", async (req, res) => {
   }
 });
 
-router.post("/deleteitem", async (req, res) => {
+router.post("/deleteitem", auth, async (req, res) => {
   const itemid = req.body.itemid;
   try {
     await Item.findOneAndDelete({ _id: itemid });

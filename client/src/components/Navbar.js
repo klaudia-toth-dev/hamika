@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "../actions/userActions";
-// import { Link } from "react-scroll";
+// import history from "../customRoutes/history";
+// import { logoutUser } from "../actions/userActions";
+import { signout } from "../actions/authActions";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const cartState = useSelector((state) => state.cartReducer);
-  const userState = useSelector((state) => state.loginUserReducer);
-  const { currentUser } = userState;
-
-  const user = null;
-
+  // const userState = useSelector((state) => state.authReducer);
+  // const { currentUser } = userState;
+  const isLoggedIn = localStorage.getItem("profile") ? true : false;
+  const currentUserDetails = localStorage.getItem("profile")
+    ? JSON.parse(localStorage.getItem("profile")).result
+    : "";
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // const token = currentUser?.token;
+    // JWT
+  }, [navigate]);
 
   return (
-    <div className="navbar-div sticky real-nav">
+    <div className="navbar-div fixed-nav">
       <nav className="navbar navbar-expand-lg">
-        {currentUser && currentUser.isAdmin ? (
+        {isLoggedIn && currentUserDetails.isAdmin ? (
           <b>ADMIN PANEL</b>
         ) : (
           <a className="navbar-brand" href="/">
@@ -34,23 +43,8 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          {user ? (
-            <div>
-              <div>{user.result.name}</div>
-              <a className="dropdown-item" href="/">
-                Sign out
-              </a>
-            </div>
-          ) : (
-            <div>
-              <div> no user</div>
-              <a className="nav-link" href="/auth">
-                <b>Sign in</b>
-              </a>
-            </div>
-          )}
           <ul className="navbar-nav ms-auto justify-content-end">
-            {!currentUser && cartState.cartItems.length > 0 && (
+            {!isLoggedIn && cartState.cartItems.length > 0 && (
               <li className="nav-item mr-3">
                 <a className="nav-link" href="/cart">
                   <b>Cart </b>
@@ -60,8 +54,8 @@ export default function Navbar() {
                 </a>
               </li>
             )}
-            {currentUser &&
-              !currentUser.isAdmin &&
+            {isLoggedIn &&
+              !currentUserDetails.isAdmin &&
               cartState.cartItems.length > 0 && (
                 <li className="nav-item mt-2 mr-3">
                   <a className="nav-link" href="/cart">
@@ -75,12 +69,13 @@ export default function Navbar() {
                   </a>
                 </li>
               )}
-            {currentUser && currentUser.isAdmin && (
+            {isLoggedIn && currentUserDetails.isAdmin && (
               <li className="nav-item mt-2 mr-3">
-                <b>{currentUser.name} </b>
+                <b>{currentUserDetails.name} </b>
+                <b>{currentUserDetails.isAdmin ? "admin" : ""} </b>
               </li>
             )}
-            {currentUser && !currentUser.isAdmin && (
+            {isLoggedIn && !currentUserDetails.isAdmin && (
               <div className="dropdown">
                 <button
                   className="dropdown-toggle btn profile-button"
@@ -90,7 +85,8 @@ export default function Navbar() {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <b>{currentUser.name}</b>
+                  <b>{currentUserDetails.name}</b>
+                  <b>{currentUserDetails.isAdmin ? "admin" : ""} </b>
                 </button>
                 <div
                   className="dropdown-menu"
@@ -99,35 +95,33 @@ export default function Navbar() {
                   <a className="dropdown-item" href="/orders">
                     Orders
                   </a>
-                  <a
-                    className="dropdown-item"
-                    href="/"
+                  <button
+                    className="dropdown-item link"
                     onClick={() => {
-                      dispatch(logoutUser());
+                      dispatch(signout(navigate));
                     }}
                   >
-                    Logout
-                  </a>
+                    Sign out
+                  </button>
                 </div>
               </div>
             )}
-            {currentUser && currentUser.isAdmin && (
+            {isLoggedIn && currentUserDetails.isAdmin && (
               <li className="nav-item">
-                <a
-                  className="nav-link"
-                  href="/"
+                <button
+                  className="dropdown-item link"
                   onClick={() => {
-                    dispatch(logoutUser());
+                    dispatch(signout(navigate));
                   }}
                 >
-                  <b>Logout</b>
-                </a>
+                  Sign out
+                </button>
               </li>
             )}
-            {!currentUser && (
+            {!isLoggedIn && (
               <li className="nav-item">
-                <a className="nav-link" href="/login">
-                  <b>Login</b>
+                <a className="nav-link" href="/auth">
+                  <b>Sign In</b>
                 </a>
               </li>
             )}

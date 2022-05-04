@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../middleware/auth");
+
 const { v4: uuidv4 } = require("uuid");
 const stripe = require("stripe")(
   "sk_test_51Kk7pWG0zk4XrIkWhPms0w6Zt5SbrQ6B02bb8U0wcY2IJPutPZz3gQgwiPaj44vD9thEJCxPUJtKct2ckLVzDowf00FGhHT65f"
 );
 const Order = require("../models/orderModel");
 
-router.post("/placeorder", async (req, res) => {
+router.post("/placeorder", auth, async (req, res) => {
   const { token, subtotal, currentUser, cartItems, note } = req.body;
   try {
     const customer = await stripe.customers.create({
@@ -53,7 +55,7 @@ router.post("/placeorder", async (req, res) => {
   }
 });
 
-router.post("/getuserorders", async (req, res) => {
+router.post("/getuserorders", auth, async (req, res) => {
   const { userId } = req.body;
   try {
     const orders = await Order.find({ userId: userId }).sort({ _id: -1 });
@@ -64,7 +66,7 @@ router.post("/getuserorders", async (req, res) => {
 });
 module.exports = router;
 
-router.get("/getallorders", async (req, res) => {
+router.get("/getallorders", auth, async (req, res) => {
   try {
     const orders = await Order.find({});
     res.send(orders);

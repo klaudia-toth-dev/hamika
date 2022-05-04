@@ -108,6 +108,7 @@ tr {
 /* APP CONTENT */
 .app-content{
   min-height: calc(100vh - 228px);
+  margin-top: 90px;
 }
 
 /* NAVBAR */
@@ -172,11 +173,12 @@ tr {
   font-weight: 600;
 }
 
-.sticky {
-	position: -webkit-sticky;
-	position: sticky;
+.fixed-nav {
+	position: fixed;
 	top: 0;
+  width: 100vw;
   z-index: 11111;
+  left: 0;
 }
 
 .cart-items-num {

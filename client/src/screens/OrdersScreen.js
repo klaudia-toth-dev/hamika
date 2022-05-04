@@ -5,7 +5,7 @@ import Loading from "../components/Loading";
 import Error from "../components/Error";
 
 export default function OrdersScreen() {
-  const userState = useSelector((state) => state.loginUserReducer);
+  const userState = useSelector((state) => state.authReducer);
   const { currentUser } = userState;
 
   const dispatch = useDispatch();

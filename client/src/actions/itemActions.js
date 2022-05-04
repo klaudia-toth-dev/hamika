@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as api from "../api/index.js";
 
 export const getAllItems = () => async (dispatch) => {
   dispatch({ type: "GET_ITEMS_REQUEST" });
@@ -15,7 +16,8 @@ export const getItemById = (itemid) => async (dispatch) => {
   dispatch({ type: "GET_ITEMBYID_REQUEST" });
 
   try {
-    const response = await axios.post("/api/items/getitembyid", { itemid });
+    const response = await api.additem(itemid);
+    // const response = await axios.post("/api/items/getitembyid", { itemid });
     console.log(response);
     dispatch({ type: "GET_ITEMBYID_SUCCESS", payload: response.data });
   } catch (error) {

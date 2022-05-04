@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import AdminAddItem from "./AdminAddItem";
 import AdminEditItem from "./AdminEditItem";
 import AdminMenu from "./AdminMenu";
@@ -8,18 +8,19 @@ import AdminUsers from "./AdminUsers";
 import AdminOrders from "./AdminOrders";
 
 export default function AdminScreen() {
-  const userState = useSelector((state) => state.loginUserReducer);
+  const userState = useSelector((state) => state.authReducer);
   const { currentUser } = userState;
 
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (!currentUser.isAdmin) {
-      window.location.href = "/";
+    if (!currentUser.result.isAdmin) {
+      navigate("/");
     }
   }, []);
   return (
     <div>
-      {currentUser.isAdmin && (
+      {currentUser.result.isAdmin && (
         <div className="row justify-content-center">
           <div className="col-md-12">
             <ul className="adminfunction">

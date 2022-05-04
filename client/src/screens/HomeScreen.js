@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { getAllItems } from "../actions/itemActions";
 import data from "../data";
 import Item from "../components/Item";
@@ -8,18 +10,20 @@ import Error from "../components/Error";
 import Filter from "../components/Filter";
 
 export default function HomeScreen() {
-  const userState = useSelector((state) => state.loginUserReducer);
+  const userState = useSelector((state) => state.authReducer);
   const { currentUser } = userState;
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const itemsState = useSelector((state) => state.getAllItemsReducer);
   const { items, error, loading } = itemsState;
 
   useEffect(() => {
-    if (currentUser && currentUser.isAdmin) {
-      window.location.href = "/admin";
+    console.log(currentUser, "currentUser -> navigate to admin");
+    if (currentUser && currentUser.result.isAdmin) {
+      navigate("/admin");
     }
     dispatch(getAllItems());
   }, []);

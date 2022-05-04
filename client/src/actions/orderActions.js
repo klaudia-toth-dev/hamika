@@ -2,7 +2,7 @@ import axios from "axios";
 export const placeOrder =
   (token, subtotal, note) => async (dispatch, getState) => {
     dispatch({ type: "PLACE_OREDER_REQUEST" });
-    const currentUser = getState().loginUserReducer.currentUser;
+    const currentUser = getState().authReducer.currentUser;
     const cartItems = getState().cartReducer.cartItems;
     try {
       const response = await axios.post("/api/orders/placeorder", {
@@ -25,7 +25,7 @@ export const placeOrder =
   };
 
 export const getUserOrders = () => async (dispatch, getState) => {
-  const currentUser = getState().loginUserReducer.currentUser;
+  const currentUser = getState().authReducer.currentUser;
   dispatch({ type: "GET_USER_ORDERS_REQUEST" });
 
   try {
@@ -40,7 +40,7 @@ export const getUserOrders = () => async (dispatch, getState) => {
 };
 
 export const getAllOrders = () => async (dispatch, getState) => {
-  const currentUser = getState().loginUserReducer.currentUser;
+  const currentUser = getState().authReducer.currentUser;
   dispatch({ type: "GET_ALL_ORDERS_REQUEST" });
 
   try {
