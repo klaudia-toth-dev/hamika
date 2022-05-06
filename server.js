@@ -1,46 +1,61 @@
-const express = require("express");
+// const express = require("express");
 
-const Item = require("./models/itemModel");
-const User = require("./models/userModel");
+// const Item = require("./models/itemModel");
+// const User = require("./models/userModel");
+
+// const app = express();
+// const db = require("./db.js");
+
+// app.use(express.json());
+
+// const itemsRoute = require("./routes/itemsRoute");
+// const userRoute = require("./routes/userRoute");
+// const ordersRoute = require("./routes/ordersRoute");
+
+// app.use("/api/items/", itemsRoute);
+// app.use("/api/users/", userRoute);
+// app.use("/api/orders/", ordersRoute);
+
+// app.get("/", (req, res) => {
+//   res.send("Server working on port " + port);
+// });
+
+// const port = process.env.PORT || 8000;
+
+// app.listen(port, () => "Server running");
+const express = require("express");
+const connectDB = require("./config/db");
+const path = require("path");
+const helmet = require("helmet");
 
 const app = express();
+
+// Connect Database
 const db = require("./db.js");
 
-//client
-// const path = require("path");
+// connectDB();
 
-app.use(express.json());
+// Init Middleware
+app.use(express.json({ extended: false }));
+app.use(helmet());
 
-//client
-// app.use(express.static(path.join(__dirname, "client", "build")));
+// Define Routes
+app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/profile", require("./routes/api/profile"));
 
-const itemsRoute = require("./routes/itemsRoute");
-const userRoute = require("./routes/userRoute");
-const ordersRoute = require("./routes/ordersRoute");
+// Serve static assets in production
+if (process.env.NODE_ENV === "production") {
+  // Set static folder
+  app.use(express.static("client/build"));
 
-app.use("/api/items/", itemsRoute);
-app.use("/api/users/", userRoute);
-app.use("/api/orders/", ordersRoute);
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
-app.get("/", (req, res) => {
-  res.send("Server working on port " + port);
-});
+const PORT = process.env.PORT || 8000;
 
-// app.get("/getitems", (req, res) => {
-//   Item.find({}, (err, docs) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.send(docs);
-//     }
-//   });
-// });
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
-const port = process.env.PORT || 8000;
-
-//client
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-// });
-
-app.listen(port, () => "Server running");
+module.exports = app;
