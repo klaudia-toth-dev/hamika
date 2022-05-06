@@ -46,9 +46,9 @@ import { getCurrentProfile } from "../../actions/profile";
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 
 const Dashboard = ({ user }) => {
-  if (!user) {
-    return <Navigate to="/auth/login" replace />;
-  }
+  // if (!user) {
+  //   return <Navigate to="/auth/login" replace />;
+  // }
   // useEffect(() => {
   //   getCurrentProfile();
   // }, [getCurrentProfile]);
