@@ -38,13 +38,15 @@
 //   );
 // }
 
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import CustomRoutes from "./components/routing/CustomRoutes";
 import CFooter from "./components/layout/CFooter";
+
+import MenuScreen from "./screens/MenuScreen";
 
 // Redux
 import { Provider } from "react-redux";
@@ -62,24 +64,28 @@ if (localStorage.token) {
 }
 
 const App = () => {
+  // const pathName = window.location.pathname;
+
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
-
   return (
     <Provider store={store}>
-      <div className="container app-content">
-        <Router>
-          <Fragment>
-            <Navbar />
+      <Router>
+        <Fragment>
+          {/* {pathName === "/" && <div>LANDING</div>}
+          {pathName !== "/" && <div>OTHER</div>} */}
+          <Navbar />
+          <div className="container app-content">
             <Routes>
               <Route path="/" element={<Landing />} />
+              <Route path="/menu" element={<MenuScreen />} />
               <Route path="/auth/*" element={<CustomRoutes />} />
               {/* <Route path="/login" element={<Login />} /> */}
             </Routes>
-          </Fragment>
-        </Router>
-      </div>
+          </div>
+        </Fragment>
+      </Router>
       <CFooter />
     </Provider>
   );

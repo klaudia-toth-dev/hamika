@@ -19,12 +19,12 @@ app.use(helmet());
 // app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
 // app.use("/api/profile", require("./routes/api/profile"));
-// const itemsRoute = require("./routes/itemsRoute");
+const itemsRoute = require("./routes/itemsRoute");
 const userRoute = require("./routes/userRoute");
 const profile = require("./routes/api/profile");
 // const ordersRoute = require("./routes/ordersRoute");
 
-// app.use("/api/items/", itemsRoute);
+app.use("/api/items/", itemsRoute);
 app.use("/api/profile/", profile);
 app.use("/api/users/", userRoute);
 // app.use("/api/orders/", ordersRoute);

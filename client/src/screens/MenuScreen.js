@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllItems } from "../actions/itemActions";
-import data from "../data";
+// import data from "../data";
 import Item from "../components/Item";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 import Filter from "../components/Filter";
 
-export default function HomeScreen() {
-  const userState = useSelector((state) => state.loginUserReducer);
-  const { currentUser } = userState;
+export default function MenuScreen() {
+  // const userState = useSelector((state) => state.loginUserReducer);
+  // const { currentUser } = userState;
 
   useEffect(() => {}, []);
 
@@ -18,9 +18,9 @@ export default function HomeScreen() {
   const { items, error, loading } = itemsState;
 
   useEffect(() => {
-    if (currentUser && currentUser.isAdmin) {
-      window.location.href = "/admin";
-    }
+    // if (currentUser && currentUser.isAdmin) {
+    //   window.location.href = "/admin";
+    // }
     dispatch(getAllItems());
   }, []);
 
