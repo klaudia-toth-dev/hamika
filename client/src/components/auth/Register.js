@@ -14,7 +14,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     password2: "",
   });
 
-  console.log(formData);
   const { firstName, lastName, email, password, password2 } = formData;
 
   const onChange = (e) =>
@@ -35,61 +34,64 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <h1 className="large text-primary">Sign Up</h1>
-      <p className="lead">
-        <i className="fas fa-user" /> Create Your Account
-      </p>
-      <form className="form" onSubmit={(e) => onSubmit(e)}>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="firstName"
-            name="firstName"
-            value={firstName}
-            onChange={(e) => onChange(e)}
-          />
+      <div className="row justify-content-center auth-content">
+        <div className="text-left shadow-lg auth-card rounded">
+          <h1 className="my-2">Sign Up</h1>
+          <p className="lead">
+            <i className="fas fa-user" /> Create Your Account
+          </p>
+          <form onSubmit={(e) => onSubmit(e)}>
+            <div className="auth-fields">
+              <input
+                className="form-control"
+                type="text"
+                placeholder="firstName"
+                name="firstName"
+                value={firstName}
+                onChange={(e) => onChange(e)}
+              />
+              <input
+                className="form-control"
+                type="text"
+                placeholder="lastName"
+                name="lastName"
+                value={lastName}
+                onChange={(e) => onChange(e)}
+              />
+              <input
+                className="form-control"
+                type="email"
+                placeholder="Email Address"
+                name="email"
+                value={email}
+                onChange={(e) => onChange(e)}
+              />
+              <input
+                className="form-control"
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={password}
+                onChange={(e) => onChange(e)}
+              />
+              <input
+                className="form-control"
+                type="password"
+                placeholder="Confirm Password"
+                name="password2"
+                value={password2}
+                onChange={(e) => onChange(e)}
+              />
+            </div>
+            <button type="submit" className="btn mt-3 mb-3">
+              SIGN UP
+            </button>
+          </form>
+          <p className="my-1">
+            Already have an account? <Link to="/auth/login">Sign In</Link>
+          </p>
         </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="lastName"
-            name="lastName"
-            value={lastName}
-            onChange={(e) => onChange(e)}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="email"
-            placeholder="Email Address"
-            name="email"
-            value={email}
-            onChange={(e) => onChange(e)}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={(e) => onChange(e)}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            name="password2"
-            value={password2}
-            onChange={(e) => onChange(e)}
-          />
-        </div>
-        <input type="submit" className="btn btn-primary" value="Register" />
-      </form>
-      <p className="my-1">
-        Already have an account? <Link to="/auth/login">Sign In</Link>
-      </p>
+      </div>
     </Fragment>
   );
 };

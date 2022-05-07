@@ -1,7 +1,4 @@
 // // import logo from "./logo.svg";
-// import "./App.css";
-// import bootstrap from "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap";
 
 // import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 // import LandingNavbar from "./components/LandingNavbar";
@@ -41,15 +38,13 @@
 //   );
 // }
 
-// export default App;
-
 import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import CustomRoutes from "./components/routing/CustomRoutes";
-
-// import Login from "./components/auth/Login";
+import CFooter from "./components/layout/CFooter";
 
 // Redux
 import { Provider } from "react-redux";
@@ -57,7 +52,10 @@ import store from "./store";
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 
+//styles
 import "./App.css";
+import bootstrap from "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -70,16 +68,19 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <Router>
-        <Fragment>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/auth/*" element={<CustomRoutes />} />
-            {/* <Route path="/login" element={<Login />} /> */}
-          </Routes>
-        </Fragment>
-      </Router>
+      <div className="container app-content">
+        <Router>
+          <Fragment>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/auth/*" element={<CustomRoutes />} />
+              {/* <Route path="/login" element={<Login />} /> */}
+            </Routes>
+          </Fragment>
+        </Router>
+      </div>
+      <CFooter />
     </Provider>
   );
 };

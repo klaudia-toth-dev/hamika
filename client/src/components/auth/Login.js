@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/auth";
 
+// import Loading from "../components/Loading";
+// import Error from "../components/Error";
+
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: "",
@@ -26,38 +29,46 @@ const Login = ({ login, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <h1 className="large text-primary">Sign In</h1>
-      <p className="lead">
-        <i className="fas fa-user" /> Sign Into Your Account
-      </p>
-      <form className="form" onSubmit={(e) => onSubmit(e)}>
-        <div className="form-group">
-          <input
-            id="email-input"
-            type="email"
-            placeholder="Email Address"
-            name="email"
-            value={email}
-            onChange={(e) => onChange(e)}
-            required
-          />
+      <div className="row justify-content-center auth-content">
+        <div className="text-left shadow-lg auth-card rounded">
+          <h1 className="my-2">Sign In</h1>
+          <p className="lead">
+            <i className="fas fa-user" /> Sign Into Your Account
+          </p>
+          {/* {loading && <Loading />}
+          {error && <Error error="Invalid Creditentals" />} */}
+          <form onSubmit={(e) => onSubmit(e)}>
+            <div className="auth-fields">
+              <input
+                className="form-control"
+                id="email-input"
+                type="email"
+                placeholder="Email Address"
+                name="email"
+                value={email}
+                onChange={(e) => onChange(e)}
+                required
+              />
+              <input
+                className="form-control"
+                id="password-input"
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={password}
+                onChange={(e) => onChange(e)}
+                minLength="6"
+              />
+              <button type="submit" className="btn mt-3 mb-3">
+                SIGN IN
+              </button>
+            </div>
+          </form>
+          <p className="my-1">
+            Don't have an account? <Link to="/auth/register">Sign Up</Link>
+          </p>
         </div>
-        <div className="form-group">
-          <input
-            id="password-input"
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={(e) => onChange(e)}
-            minLength="6"
-          />
-        </div>
-        <input type="submit" className="btn btn-primary" value="Login" />
-      </form>
-      <p className="my-1">
-        Don't have an account? <Link to="/auth/register">Sign Up</Link>
-      </p>
+      </div>
     </Fragment>
   );
 };
