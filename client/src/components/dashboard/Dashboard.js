@@ -53,6 +53,7 @@ const Dashboard = ({ user }) => {
   //   getCurrentProfile();
   // }, [getCurrentProfile]);
 
+  console.log(user, "HOL A USER");
   return (
     <Fragment>
       <h1 className="large text-primary">

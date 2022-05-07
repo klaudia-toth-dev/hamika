@@ -29,6 +29,9 @@
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 
 const PrivateRoute = ({ user, redirectPath = "/auth/login", children }) => {
+  console.log(user, "ITT MEG MEGVAN");
+  console.log("private route");
+
   if (!user) {
     return <Navigate to={redirectPath} replace />;
   }

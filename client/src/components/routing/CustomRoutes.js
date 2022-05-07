@@ -18,6 +18,7 @@ function CustomRoutes({
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
+  console.log(user, "ITT?");
   return (
     <section className="container">
       <h1>{user && user.firstName}</h1>
@@ -25,14 +26,16 @@ function CustomRoutes({
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute user={user}>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
+        {user && (
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute user={user}>
+                <Dashboard user={user} />
+              </PrivateRoute>
+            }
+          />
+        )}
         {/* <PrivateRoute path="/dashboard" element={<Dashboard />} /> */}
         <Route element={<NotFound />} />
       </Routes>

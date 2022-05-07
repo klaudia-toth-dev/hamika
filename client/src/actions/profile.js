@@ -14,6 +14,7 @@ import {
 // Get current users profile
 export const getCurrentProfile = () => async (dispatch) => {
   try {
+    console.log("hm?");
     const res = await axios.get("/api/profile/me");
     console.log("hm?", res);
 

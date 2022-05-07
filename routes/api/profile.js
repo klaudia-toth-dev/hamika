@@ -7,15 +7,15 @@ const { check, validationResult } = require("express-validator");
 // bring in normalize to give us a proper url, regardless of what user entered
 const normalize = require("normalize-url");
 
-const Profile = require("../../models/Profile");
-const User = require("../../models/User");
+const Profile = require("../../models/UserModel");
+const User = require("../../models/UserModel");
 
 // @route    GET api/profile/me
 // @desc     Get current users profile
 // @access   Private
-router.get("/me", auth, async (req, res) => {
+router.get("me", auth, async (req, res) => {
+  console.log("asd");
   try {
-    console.log("asd");
     const profile = await Profile.findOne({
       user: req.user.id,
     }).populate("user", ["firstName", "lastName", "email"]);
