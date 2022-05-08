@@ -1,36 +1,67 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 
 const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
   // const pathName = window.location.pathname;
+  const cartState = useSelector((state) => state.cartReducer);
 
   const authLinks = (
     <Fragment>
       <Link className="navbar-brand" to="/">
         <i className="fas fa-utensils" /> <b> HAMIKA</b>
       </Link>
-      <div className="dropdown">
-        <button
-          className="dropdown-toggle btn profile-button"
-          type="button"
-          id="dropdownMenuButton"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <b>{user && user.firstName}</b>
-        </button>
-        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a className="dropdown-item" href="/orders">
-            Orders
-          </a>
-          <a className="dropdown-item" href="/" onClick={logout}>
-            Logout
-            {/* <i className="fas fa-sign-out-alt" /> */}
-          </a>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav ms-auto justify-content-end">
+          <li className="nav-item mr-3">
+            <Link className="nav-link" to="/menu">
+              <b>Menu </b>
+            </Link>
+          </li>
+          <li className="nav-item mr-3">
+            <Link className="nav-link" to="/cart">
+              <b>Cart </b>
+              <span className="cart-items-num">
+                {cartState.cartItems.length}
+              </span>
+            </Link>
+          </li>
+        </ul>
+        <div className="dropdown">
+          <button
+            className="dropdown-toggle btn profile-button"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <b>{user && user.firstName}</b>
+          </button>
+          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a className="dropdown-item" href="/orders">
+              Orders
+            </a>
+            <a className="dropdown-item" href="/" onClick={logout}>
+              Logout
+              {/* <i className="fas fa-sign-out-alt" /> */}
+            </a>
+          </div>
         </div>
       </div>
     </Fragment>
@@ -76,9 +107,9 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
           <li className="nav-item mr-3">
             <Link className="nav-link" to="/cart">
               <b>Cart </b>
-              {/* <span className="cart-items-num">
+              <span className="cart-items-num">
                 {cartState.cartItems.length}
-              </span> */}
+              </span>
             </Link>
           </li>
           <li className="nav-item">

@@ -5,14 +5,14 @@ import {
   LOGOUT,
 } from "../actions/types";
 
-const initialState = {
-  token: localStorage.getItem("token"),
-  isAuthenticated: false,
-  loading: true,
-  user: null,
-};
+// const initialState = {
+//   token: localStorage.getItem("token"),
+//   isAuthenticated: false,
+//   loading: true,
+//   user: null,
+// };
 
-export default function (state = initialState, action) {
+export default function (state = { auth: [] }, action) {
   const { type, payload } = action;
 
   switch (type) {

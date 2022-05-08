@@ -5,15 +5,15 @@ import { deleteFromCart } from "../actions/cartActions";
 import CheckOut from "../components/CheckOut";
 
 export default function CartScreen() {
-  const userState = useSelector((state) => state.loginUserReducer);
-  const { currentUser } = userState;
+  const userState = useSelector((state) => state.auth);
+  const { user } = userState;
 
   const [note, setNote] = useState("");
 
   useEffect(() => {
-    if (currentUser && currentUser.isAdmin) {
-      window.location.href = "/admin";
-    }
+    // if (currentUser && currentUser.isAdmin) {
+    //   window.location.href = "/admin";
+    // }
   }, []);
 
   const cartState = useSelector((state) => state.cartReducer);
@@ -22,13 +22,13 @@ export default function CartScreen() {
   const dispatch = useDispatch();
   return (
     <div>
-      <div className="d-flex">
+      {/* <div className="d-flex">
         <a href="/menu" className="back-to-order-link">
-          <i class="fa fa-chevron-left" aria-hidden="true">
+          <i className="fa fa-chevron-left" aria-hidden="true">
             <span> back to order</span>
           </i>
         </a>
-      </div>
+      </div> */}
       <div className="cart-screen">
         <div className="row justify-content-center">
           <div className="col-md-12">
@@ -101,7 +101,7 @@ export default function CartScreen() {
               </div>
             )}
           </div>
-          {cartState.cartItems.length > 0 && currentUser && (
+          {cartState.cartItems.length > 0 && user && (
             <div className="col-md-12 text-right mt-3">
               <h3 className="col-md-12 mt-3">Comment</h3>
               <div className="col-md-12 mt-1">
@@ -120,9 +120,9 @@ export default function CartScreen() {
               </div>
             </div>
           )}
-          {cartState.cartItems.length > 0 && !currentUser && (
+          {cartState.cartItems.length > 0 && !user && (
             <div className="col-md-12 text-right mt-3">
-              <a href="/login" className="btn">
+              <a href="/auth/login" className="btn">
                 Log in to finish
               </a>
             </div>

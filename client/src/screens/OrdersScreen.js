@@ -4,23 +4,29 @@ import { getUserOrders } from "../actions/orderActions";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 
-export default function OrdersScreen() {
-  const userState = useSelector((state) => state.loginUserReducer);
-  const { currentUser } = userState;
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
+  // const userState = useSelector((state) => state.auth);
+  // const { user } = userState;
+
+  // const authState = useSelector((state) => state.auth);
+  // console.log(authState, "authState");
 
   const dispatch = useDispatch();
 
   const orderState = useSelector((state) => state.getUserOrdersReducer);
   const { orders, error, loading } = orderState;
 
-  console.log(orderState.note, "note");
+  // console.log(orderState, "orderState");
 
   useEffect(() => {
-    if (currentUser && currentUser.isAdmin) {
+    if (user && user.isAdmin) {
       window.location.href = "/admin";
     }
     dispatch(getUserOrders());
-  }, []);
+  }, [user]);
+
   return (
     <div className="order-screen">
       <h1>My Orders</h1>
@@ -68,4 +74,14 @@ export default function OrdersScreen() {
       </div>
     </div>
   );
-}
+};
+
+OrdersScreen.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(OrdersScreen);

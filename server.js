@@ -22,12 +22,12 @@ app.use("/api/auth", require("./routes/api/auth"));
 const itemsRoute = require("./routes/itemsRoute");
 const userRoute = require("./routes/userRoute");
 const profile = require("./routes/api/profile");
-// const ordersRoute = require("./routes/ordersRoute");
+const ordersRoute = require("./routes/ordersRoute");
 
 app.use("/api/items/", itemsRoute);
 app.use("/api/profile/", profile);
 app.use("/api/users/", userRoute);
-// app.use("/api/orders/", ordersRoute);
+app.use("/api/orders/", ordersRoute);
 
 // Serve static assets in production
 if (process.env.NODE_ENV === "production") {

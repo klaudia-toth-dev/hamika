@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
+const auth = require("../middleware/auth");
 const stripe = require("stripe")(
   "sk_test_51Kk7pWG0zk4XrIkWhPms0w6Zt5SbrQ6B02bb8U0wcY2IJPutPZz3gQgwiPaj44vD9thEJCxPUJtKct2ckLVzDowf00FGhHT65f"
 );
 const Order = require("../models/orderModel");
 
-router.post("/placeorder", async (req, res) => {
+router.post("/placeorder", auth, async (req, res) => {
   const { token, subtotal, currentUser, cartItems, note } = req.body;
   try {
     const customer = await stripe.customers.create({
@@ -28,7 +29,7 @@ router.post("/placeorder", async (req, res) => {
 
     if (payment) {
       const neworder = new Order({
-        name: currentUser.name,
+        name: currentUser.firstName + " " + currentUser.lastName,
         email: currentUser.email,
         userId: currentUser._id,
         orderItems: cartItems,
@@ -44,6 +45,7 @@ router.post("/placeorder", async (req, res) => {
       });
 
       neworder.save();
+      console.log("SUCCESS ORDER");
       res.send("Order placed successfully");
     } else {
       res.send("Payment failed");
@@ -53,8 +55,10 @@ router.post("/placeorder", async (req, res) => {
   }
 });
 
-router.post("/getuserorders", async (req, res) => {
+router.post("/getuserorders", auth, async (req, res) => {
+  console.log("miuz?");
   const { userId } = req.body;
+  console.log(userId, "from request");
   try {
     const orders = await Order.find({ userId: userId }).sort({ _id: -1 });
     res.send(orders);

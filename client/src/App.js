@@ -42,11 +42,13 @@ import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
-import Landing from "./components/layout/Landing";
+// import Landing from "./components/layout/Landing";
 import CustomRoutes from "./components/routing/CustomRoutes";
 import CFooter from "./components/layout/CFooter";
 
 import MenuScreen from "./screens/MenuScreen";
+import CartScreen from "./screens/CartScreen";
+import OrdersScreen from "./screens/OrdersScreen";
 
 // Redux
 import { Provider } from "react-redux";
@@ -78,9 +80,11 @@ const App = () => {
           <Navbar />
           <div className="container app-content">
             <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/menu" element={<MenuScreen />} />
+              <Route path="/" element={<div>LANDING</div>} />
               <Route path="/auth/*" element={<CustomRoutes />} />
+              <Route path="/menu" element={<MenuScreen />} />
+              <Route path="/cart" element={<CartScreen />} />
+              <Route path="/orders" element={<OrdersScreen />} />
               {/* <Route path="/login" element={<Login />} /> */}
             </Routes>
           </div>

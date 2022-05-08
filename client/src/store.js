@@ -7,23 +7,22 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import rootReducer from "./reducers";
 
-const initialState = {};
-// const initialState = {
-//   cartReducer: {
-//     cartItems: cartItems,
-//   },
-//   loginUserReducer: {
-//     currentUser: currentUser,
-//   },
-// };
+// const initialState = {};
 
-// const cartItems = localStorage.getItem("cartItems")
-//   ? JSON.parse(localStorage.getItem("cartItems"))
-//   : [];
+const cartItems = localStorage.getItem("cartItems")
+  ? JSON.parse(localStorage.getItem("cartItems"))
+  : [];
 
-// const currentUser = localStorage.getItem("currentUser")
-//   ? JSON.parse(localStorage.getItem("currentUser"))
-//   : null;
+const initialState = {
+  cartReducer: {
+    cartItems: cartItems,
+  },
+  auth: {
+    token: localStorage.getItem("token"),
+    isAuthenticated: false,
+    loading: true,
+  },
+};
 
 const middleware = [thunk];
 
