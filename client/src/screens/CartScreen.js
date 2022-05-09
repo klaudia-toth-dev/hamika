@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../actions/cartActions";
 import { deleteFromCart } from "../actions/cartActions";
 import CheckOut from "../components/CheckOut";
+import { Link, Navigate } from "react-router-dom";
 
 export default function CartScreen() {
   const userState = useSelector((state) => state.auth);
@@ -122,9 +123,9 @@ export default function CartScreen() {
           )}
           {cartState.cartItems.length > 0 && !user && (
             <div className="col-md-12 text-right mt-3">
-              <a href="/auth/login" className="btn">
+              <Link to="/login" className="btn">
                 Log in to finish
-              </a>
+              </Link>
             </div>
           )}
         </div>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserOrders } from "../actions/orderActions";
-import Loading from "../components/Loading";
-import Error from "../components/Error";
+import { getUserOrders } from "../../actions/orderActions";
+import Loading from "../../components/Loading";
+import Error from "../../components/Error";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -21,11 +21,12 @@ const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
   // console.log(orderState, "orderState");
 
   useEffect(() => {
-    if (user && user.isAdmin) {
-      window.location.href = "/admin";
-    }
+    // if (user && user.isAdmin) {
+    //   window.location.href = "/admin";
+    // }
     dispatch(getUserOrders());
-  }, [user]);
+  }, []);
+  // }, [user]);
 
   return (
     <div className="order-screen">

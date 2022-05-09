@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "../actions/userActions";
+import { getAllUsers } from "../../../actions/userActions";
 
-import Loading from "../components/Loading";
-import Error from "../components/Error";
+import Loading from "../../../components/Loading";
+import Error from "../../../components/Error";
 
 export default function AdminUsers() {
   const dispatch = useDispatch();
@@ -13,6 +13,7 @@ export default function AdminUsers() {
   useEffect(() => {
     dispatch(getAllUsers());
   }, []);
+
   return (
     <div className="admin-users">
       {loading && <Loading />}

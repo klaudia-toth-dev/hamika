@@ -497,7 +497,6 @@ tr {
 }
 
 .admin-content{
-  margin-top: 6rem;
   justify-content: center;
   display: flex;
 }
@@ -509,10 +508,6 @@ tr {
 .admin-users{
   min-width: 80%;
 }
-
-/* .admin-content table tbody{
-  color: rgb(10, 0, 0);
-} */
 
 .styled-table {
   margin: 25px 0;

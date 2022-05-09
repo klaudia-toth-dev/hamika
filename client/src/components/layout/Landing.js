@@ -10,9 +10,13 @@ import PropTypes from "prop-types";
 // import NotFound from "../layout/NotFound";
 // import PrivateRoute from "../routing/PrivateRoute";
 
-const Landing = ({ isAuthenticated }) => {
-  if (isAuthenticated) {
-    return <Navigate to="/auth/dashboard" />;
+const Landing = ({ isAuthenticated, user }) => {
+  if (isAuthenticated && !user.isAdmin) {
+    return <Navigate to="/menu" />;
+  }
+
+  if (isAuthenticated && user.isAdmin) {
+    return <Navigate to="/auth/admin" />;
   }
 
   return (
@@ -21,10 +25,10 @@ const Landing = ({ isAuthenticated }) => {
         <div className="landing-inner">
           <h1 className="x-large">MERN Boilerplate</h1>
           <div className="buttons">
-            <Link to="/auth/register" className="btn btn-primary">
+            <Link to="/register" className="btn btn-primary">
               Sign Up
             </Link>
-            <Link to="/auth/login" className="btn btn-light">
+            <Link to="/login" className="btn btn-light">
               Login
             </Link>
           </div>

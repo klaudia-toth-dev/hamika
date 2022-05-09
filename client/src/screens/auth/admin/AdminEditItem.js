@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getItemById } from "../actions/itemActions";
 import { useParams } from "react-router-dom";
-import { editItem } from "../actions/itemActions";
+import { getItemById, editItem } from "../../../actions/itemActions";
 
-import Loading from "../components/Loading";
-import Error from "../components/Error";
-import Success from "../components/Success";
+import Loading from "../../../components/Loading";
+import Error from "../../../components/Error";
+import Success from "../../../components/Success";
 
 export default function AdminEditItem() {
   const [name, setName] = useState("");

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Item = require("../models/itemModel");
+const auth = require("../middleware/auth");
 
 router.get("/getallitems", async (req, res) => {
   try {
@@ -12,7 +13,17 @@ router.get("/getallitems", async (req, res) => {
   }
 });
 
-router.post("/additem", async (req, res) => {
+router.post("/getitembyid", async (req, res) => {
+  const itemid = req.body.itemid;
+  try {
+    const item = await Item.findOne({ _id: itemid });
+    res.send(item);
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
+
+router.post("/additem", auth, async (req, res) => {
   const item = req.body.item;
   try {
     const newItem = new Item({
@@ -31,7 +42,7 @@ router.post("/additem", async (req, res) => {
   }
 });
 
-router.post("/edititem", async (req, res) => {
+router.post("/edititem", auth, async (req, res) => {
   const editedItem = req.body.editedItem;
   try {
     const item = await Item.findOne({ _id: editedItem._id });
@@ -49,17 +60,7 @@ router.post("/edititem", async (req, res) => {
   }
 });
 
-router.post("/getitembyid", async (req, res) => {
-  const itemid = req.body.itemid;
-  try {
-    const item = await Item.findOne({ _id: itemid });
-    res.send(item);
-  } catch (error) {
-    return res.status(400).json({ message: error });
-  }
-});
-
-router.post("/deleteitem", async (req, res) => {
+router.post("/deleteitem", auth, async (req, res) => {
   const itemid = req.body.itemid;
   try {
     await Item.findOneAndDelete({ _id: itemid });

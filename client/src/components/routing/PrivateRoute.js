@@ -26,17 +26,27 @@
 
 // export default connect(mapStateToProps)(PrivateRoute);
 
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
-const PrivateRoute = ({ user, redirectPath = "/auth/login", children }) => {
-  console.log(user, "ITT MEG MEGVAN");
-  console.log("private route");
-
-  if (!user) {
+const PrivateRoute = ({
+  user,
+  isAllowed,
+  redirectPath = "/login",
+  children,
+}) => {
+  console.log("PRIVATE ROUTE");
+  if (!isAllowed) {
     return <Navigate to={redirectPath} replace />;
+    // return <Navigate to="/login" replace />;
   }
 
-  return children;
+  return children ? (
+    <div>{React.cloneElement(children, { user })}</div>
+  ) : (
+    <Outlet />
+  );
+  // return <div>{React.cloneElement(children, { user })}</div>;
 };
 
 export default PrivateRoute;

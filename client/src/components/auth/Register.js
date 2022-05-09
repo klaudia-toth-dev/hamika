@@ -5,7 +5,7 @@ import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = ({ setAlert, register, isAuthenticated, user }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -28,8 +28,12 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     }
   };
 
-  if (isAuthenticated) {
-    return <Navigate to="/auth/dashboard" />;
+  if (isAuthenticated && !user.isAdmin) {
+    return <Navigate to="/menu" />;
+  }
+
+  if (isAuthenticated && user.isAdmin) {
+    return <Navigate to="/auth/admin" />;
   }
 
   return (
@@ -88,7 +92,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             </button>
           </form>
           <p className="my-1">
-            Already have an account? <Link to="/auth/login">Sign In</Link>
+            Already have an account? <Link to="/login">Sign In</Link>
           </p>
         </div>
       </div>

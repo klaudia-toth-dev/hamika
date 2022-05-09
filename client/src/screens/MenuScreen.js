@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllItems } from "../actions/itemActions";
-// import data from "../data";
+import { Navigate } from "react-router-dom";
+
 import Item from "../components/Item";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 import Filter from "../components/Filter";
 
 export default function MenuScreen() {
-  // const userState = useSelector((state) => state.loginUserReducer);
-  // const { currentUser } = userState;
+  const userState = useSelector((state) => state.auth);
+  const { user } = userState;
 
-  useEffect(() => {}, []);
-
-  const dispatch = useDispatch();
   const itemsState = useSelector((state) => state.getAllItemsReducer);
   const { items, error, loading } = itemsState;
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    // if (currentUser && currentUser.isAdmin) {
-    //   window.location.href = "/admin";
-    // }
     dispatch(getAllItems());
   }, []);
+
+  if (user && user.isAdmin) {
+    return <Navigate to="/auth/admin" />;
+  }
 
   return (
     <div>

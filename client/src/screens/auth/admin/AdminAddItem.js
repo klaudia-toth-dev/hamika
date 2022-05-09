@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../actions/itemActions";
-import Loading from "../components/Loading";
-import Error from "../components/Error";
-import Success from "../components/Success";
+import { addItem } from "../../../actions/itemActions";
+import Loading from "../../../components/Loading";
+import Error from "../../../components/Error";
+import Success from "../../../components/Success";
 
 export default function AdminAddItem() {
   const [name, setName] = useState("");

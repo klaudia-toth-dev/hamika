@@ -6,10 +6,11 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
+const auth = require("../middleware/auth");
 
 const User = require("../models/UserModel");
 
-router.get("/getallusers", async (req, res) => {
+router.get("/getallusers", auth, async (req, res) => {
   try {
     const users = await User.find({});
     res.send(users);

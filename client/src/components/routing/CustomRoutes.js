@@ -1,42 +1,52 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import Register from "../auth/Register";
-import Login from "../auth/Login";
 import Alert from "../layout/Alert";
-import Dashboard from "../dashboard/Dashboard";
 import NotFound from "../layout/NotFound";
 import PrivateRoute from "./PrivateRoute";
 import { getCurrentProfile } from "../../actions/profile";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import OrdersScreen from "../../screens/auth/OrdersScreen";
+import AdminScreen from "../../screens/auth/AdminScreen";
+
 function CustomRoutes({
-  getCurrentProfile,
+  // getCurrentProfile,
   auth: { user },
-  profile: { profile, loading },
+  // profile: { profile, loading },
 }) {
-  useEffect(() => {
-    getCurrentProfile();
-  }, [getCurrentProfile]);
-  console.log(user, "ITT?");
+  // useEffect(() => {
+  //   getCurrentProfile();
+  // }, [getCurrentProfile]);
+  // console.log(user, "ITT?");
   return (
     <section className="container">
-      <h1>{user && user.firstName}</h1>
       <Alert />
       <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
         {user && (
           <Route
-            path="/dashboard"
+            path="/myorders"
             element={
-              <PrivateRoute user={user}>
-                <Dashboard user={user} />
+              <PrivateRoute user={user} isAllowed={!!user}>
+                <OrdersScreen />
               </PrivateRoute>
             }
           />
         )}
-        {/* <PrivateRoute path="/dashboard" element={<Dashboard />} /> */}
+        {user && (
+          <Route
+            path="/admin/*"
+            element={
+              <PrivateRoute
+                user={user}
+                isAllowed={!!user && user.isAdmin}
+                redirectPath="/"
+              >
+                <AdminScreen />
+              </PrivateRoute>
+            }
+          />
+        )}
         <Route element={<NotFound />} />
       </Routes>
     </section>
@@ -44,14 +54,14 @@ function CustomRoutes({
 }
 
 CustomRoutes.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
+  // getCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
+  // profile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  profile: state.profile,
+  // profile: state.profile,
 });
 
 export default connect(mapStateToProps, { getCurrentProfile })(CustomRoutes);

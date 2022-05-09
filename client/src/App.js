@@ -42,13 +42,14 @@ import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
+import LandingNavbar from "./components/layout/LandingNavbar";
 // import Landing from "./components/layout/Landing";
 import CustomRoutes from "./components/routing/CustomRoutes";
 import CFooter from "./components/layout/CFooter";
 
 import MenuScreen from "./screens/MenuScreen";
 import CartScreen from "./screens/CartScreen";
-import OrdersScreen from "./screens/OrdersScreen";
+import WelcomeScreen from "./screens/WelcomeScreen";
 
 // Redux
 import { Provider } from "react-redux";
@@ -60,13 +61,15 @@ import setAuthToken from "./utils/setAuthToken";
 import "./App.css";
 import bootstrap from "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
 const App = () => {
-  // const pathName = window.location.pathname;
+  const pathName = window.location.pathname;
 
   useEffect(() => {
     store.dispatch(loadUser());
@@ -75,17 +78,19 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
-          {/* {pathName === "/" && <div>LANDING</div>}
-          {pathName !== "/" && <div>OTHER</div>} */}
-          <Navbar />
+          {pathName === "/" && <LandingNavbar />}
+          {pathName !== "/" && <Navbar />}
+          {/* <Navbar /> */}
           <div className="container app-content">
             <Routes>
-              <Route path="/" element={<div>LANDING</div>} />
-              <Route path="/auth/*" element={<CustomRoutes />} />
+              <Route path="/" element={<WelcomeScreen />} />
               <Route path="/menu" element={<MenuScreen />} />
               <Route path="/cart" element={<CartScreen />} />
-              <Route path="/orders" element={<OrdersScreen />} />
-              {/* <Route path="/login" element={<Login />} /> */}
+
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+
+              <Route path="/auth/*" element={<CustomRoutes />} />
             </Routes>
           </div>
         </Fragment>

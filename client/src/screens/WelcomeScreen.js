@@ -6,12 +6,12 @@ import welcomeImg2 from "../static/welcome2.jpg";
 import Map from "../components/Map";
 
 export default function WelcomeScreen() {
-  const userState = useSelector((state) => state.loginUserReducer);
-  const { currentUser } = userState;
+  const userState = useSelector((state) => state.auth);
+  const { user } = userState;
 
   useEffect(() => {
-    if (currentUser && currentUser.isAdmin) {
-      window.location.href = "/admin";
+    if (user && user.isAdmin) {
+      window.location.href = "/auth/admin";
     }
   }, []);
 

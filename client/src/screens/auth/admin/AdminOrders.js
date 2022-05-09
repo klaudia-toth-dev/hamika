@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "../components/Loading";
-import Error from "../components/Error";
-import { getAllOrders } from "../actions/orderActions";
-import { deliverOrder } from "../actions/orderActions";
+import Loading from "../../../components/Loading";
+import Error from "../../../components/Error";
+import { getAllOrders } from "../../../actions/orderActions";
+import { deliverOrder } from "../../../actions/orderActions";
 
 export default function AdminOrders() {
   const dispatch = useDispatch();

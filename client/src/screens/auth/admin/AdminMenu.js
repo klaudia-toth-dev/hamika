@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllItems, deleteItem } from "../actions/itemActions";
+import { getAllItems, deleteItem } from "../../../actions/itemActions";
 import { Link } from "react-router-dom";
 
-import Loading from "../components/Loading";
-import Error from "../components/Error";
+import Loading from "../../../components/Loading";
+import Error from "../../../components/Error";
 
 export default function AdminMenu() {
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ export default function AdminMenu() {
                       className="fa fa-trash m-2"
                       onClick={() => dispatch(deleteItem(item._id))}
                     ></i>
-                    <Link to={`/admin/edititem/${item._id}`} id={item._id}>
+                    <Link to={`/auth/admin/edititem/${item._id}`} id={item._id}>
                       <i className="fa fa-edit m-2"></i>
                     </Link>
                   </td>

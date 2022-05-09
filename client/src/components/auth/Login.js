@@ -24,7 +24,7 @@ const Login = ({ login, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    return <Navigate to="/auth/dashboard" />;
+    return <Navigate to="/menu" />;
   }
 
   return (
@@ -65,7 +65,7 @@ const Login = ({ login, isAuthenticated }) => {
             </div>
           </form>
           <p className="my-1">
-            Don't have an account? <Link to="/auth/register">Sign Up</Link>
+            Don't have an account? <Link to="/register">Sign Up</Link>
           </p>
         </div>
       </div>
