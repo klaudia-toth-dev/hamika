@@ -39,7 +39,12 @@
 // }
 
 import React, { Fragment, useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
 import LandingNavbar from "./components/layout/LandingNavbar";
@@ -69,32 +74,31 @@ if (localStorage.token) {
 }
 
 const App = () => {
-  const pathName = window.location.pathname;
+  const location = useLocation();
+  const pathName = location.pathname;
 
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
+
   return (
     <Provider store={store}>
-      <Router>
-        <Fragment>
-          {pathName === "/" && <LandingNavbar />}
-          {pathName !== "/" && <Navbar />}
-          {/* <Navbar /> */}
-          <div className="container app-content">
-            <Routes>
-              <Route path="/" element={<WelcomeScreen />} />
-              <Route path="/menu" element={<MenuScreen />} />
-              <Route path="/cart" element={<CartScreen />} />
+      <Fragment>
+        {pathName === "/" && <LandingNavbar />}
+        {pathName !== "/" && <Navbar />}
+        <div className="container app-content">
+          <Routes>
+            <Route path="/" element={<WelcomeScreen />} />
+            <Route path="/menu" element={<MenuScreen />} />
+            <Route path="/cart" element={<CartScreen />} />
 
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
 
-              <Route path="/auth/*" element={<CustomRoutes />} />
-            </Routes>
-          </div>
-        </Fragment>
-      </Router>
+            <Route path="/auth/*" element={<CustomRoutes />} />
+          </Routes>
+        </div>
+      </Fragment>
       <CFooter />
     </Provider>
   );

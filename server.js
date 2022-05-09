@@ -25,7 +25,7 @@ const profile = require("./routes/api/profile");
 const ordersRoute = require("./routes/ordersRoute");
 
 app.use("/api/items/", itemsRoute);
-app.use("/api/profile/", profile);
+// app.use("/api/profile/", profile);
 app.use("/api/users/", userRoute);
 app.use("/api/orders/", ordersRoute);
 
