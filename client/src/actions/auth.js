@@ -83,6 +83,32 @@ export const login = (email, password) => async (dispatch) => {
     }
   }
 };
+// Login User
+export const googleLogin = (data) => async (dispatch) => {
+  dispatch({ type: "GOOGLE_LOGIN_REQUEST" });
+  console.log("GOOGLE_LOGIN_REQUEST", data);
+
+  try {
+    const res = await axios.post("/api/users/googlelogin", { data });
+    console.log("GOOGLE_LOGIN_SUCCESS");
+    dispatch({
+      type: "GOOGLE_LOGIN_SUCCESS",
+      payload: res.data,
+    });
+
+    dispatch(loadUser());
+  } catch (error) {
+    const errors = error.response.data.errors;
+
+    console.log(errors, error, "HALOOO");
+
+    if (errors) {
+      errors.forEach((err) =>
+        dispatch({ type: "GOOGLE_LOGIN_ERROR", payload: err.msg })
+      );
+    }
+  }
+};
 
 // Logout
 export const logout = () => (dispatch) => {

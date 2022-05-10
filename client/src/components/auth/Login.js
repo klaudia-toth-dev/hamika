@@ -2,12 +2,11 @@ import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link, Navigate } from "react-router-dom";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { login } from "../../actions/auth";
+import { login, googleLogin, loadUser } from "../../actions/auth";
+
+import { GoogleLogin } from "react-google-login";
 
 import Loading from "../Loading";
-// import Success from "../Success";
 import Error from "../Error";
 
 const Login = () => {
@@ -33,6 +32,18 @@ const Login = () => {
   if (isAuthenticated) {
     return <Navigate to="/menu" />;
   }
+
+  const googleSuccess = async (response) => {
+    try {
+      dispatch(googleLogin(response.tokenId));
+      dispatch(loadUser());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const googleFailure = () => {
+    console.log("Google Login was unsuccessful. Try again later.");
+  };
 
   return (
     <Fragment>
@@ -71,6 +82,21 @@ const Login = () => {
               </button>
             </div>
           </form>
+          <GoogleLogin
+            clientId="1011835344650-bgr918ihmhlqn5g1hrhr46n9aluijhgh.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <button
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                className="btn"
+              >
+                Google Login
+              </button>
+            )}
+            onSuccess={googleSuccess}
+            onFailure={googleFailure}
+            cookiePolicy={"single_host_origin"}
+          />
           <p className="my-1">
             Don't have an account? <Link to="/register">Sign Up</Link>
           </p>

@@ -21,6 +21,7 @@ export const auth = (state = { auth: [] }, action) => {
   }
 };
 
+// TODO: clean the unused params
 export const authLoginReducer = (state = { auth: [] }, action) => {
   switch (action.type) {
     case "USER_LOGIN_REQUEST":
@@ -43,10 +44,59 @@ export const authLoginReducer = (state = { auth: [] }, action) => {
         loading: false,
         error: action.payload,
       };
+    case "GOOGLE_LOGIN_REQUEST":
+      return {
+        loading: true,
+      };
+    case "GOOGLE_LOGIN_SUCCESS":
+      localStorage.setItem("token", action.payload.token);
+      return {
+        ...state,
+        ...action.payload,
+        isAdmin: action.payload.isAdmin,
+        isAuthenticated: true,
+        loading: false,
+        success: true,
+      };
+    case "GOOGLE_LOGIN_ERROR":
+      return {
+        isAuthenticated: false,
+        loading: false,
+        error: action.payload,
+      };
     default:
       return state;
   }
 };
+// export const googleLoginReducer = (state = { auth: [] }, action) => {
+//   switch (action.type) {
+//     case "GOOGLE_LOGIN_REQUEST":
+//       return {
+//         loading: true,
+//       };
+//     case "GOOGLE_LOGIN_SUCCESS":
+//       console.log(action.payload, "GGOOGLE LOGIN SUCCESS");
+//       localStorage.setItem("token", action.payload.token);
+//       return {
+//         ...state,
+//         ...action.payload,
+//         isAdmin: action.payload.isAdmin,
+//         isAuthenticated: true,
+//         loading: false,
+//         success: true,
+//       };
+//     case "GOOGLE_LOGIN_ERROR":
+//       console.log(action.payload, "GGOOGLE LOGIN ERROR");
+
+//       return {
+//         isAuthenticated: false,
+//         loading: false,
+//         error: action.payload,
+//       };
+//     default:
+//       return state;
+//   }
+// };
 
 export const authRegisterReducer = (state = { auth: [] }, action) => {
   switch (action.type) {

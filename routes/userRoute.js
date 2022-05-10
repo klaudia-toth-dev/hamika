@@ -4,6 +4,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
+const { GoogleAuth } = require("google-auth-library");
+
+const client = new GoogleAuth(process.env.GOOGLE_CLIENT_ID);
 
 const User = require("../models/userModel");
 
@@ -144,5 +147,52 @@ router.post(
     }
   }
 );
+
+const googleOAuth = require("../middleware/googleOAuth");
+
+router.post("/googleLogin", async (req, res) => {
+  try {
+    const code = req.body.data;
+    const profile = await googleOAuth.getProfileInfo(code);
+
+    const { email_verified, email } = profile;
+
+    if (email_verified) {
+      User.findOne({ email }).exec((err, user) => {
+        if (user) {
+          console.log(user, "user");
+          const payload = {
+            user: {
+              id: user.id,
+            },
+          };
+          jwt.sign(
+            payload,
+            process.env.TOKEN_KEY,
+            {
+              expiresIn: 360000,
+            },
+            (err, token) => {
+              if (err) throw err;
+              return res.status(202).json({ token });
+            }
+          );
+        } else {
+          console.log("no user");
+          return res.status(400).json({
+            errors: [
+              { msg: "You are not registered user. Please sign up first!" },
+            ],
+          });
+        }
+      });
+    }
+  } catch (error) {
+    console.log("error?", error);
+    return res
+      .status(400)
+      .json({ errors: [{ msg: "Google login failed. Try again" }] });
+  }
+});
 
 module.exports = router;
