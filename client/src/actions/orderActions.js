@@ -15,7 +15,7 @@ export const placeOrder =
       dispatch({ type: "PLACE_ORDER_SUCCESS" });
       console.log(response.note, "orderAction");
       localStorage.removeItem("cartItems");
-      window.location.href = "/orders";
+      window.location.href = "/auth/myorders";
       console.log(response);
     } catch (error) {
       dispatch({ type: "PLACE_ORDER_FAILED" });
