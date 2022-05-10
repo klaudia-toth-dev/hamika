@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 
-const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
   const cartState = useSelector((state) => state.cartReducer);
 
   const adminLinks = (
@@ -111,26 +111,6 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
             </Link>
           </li>
         </ul>
-        {/* <div className="dropdown">
-          <button
-            className="dropdown-toggle btn profile-button"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            <b>{user && user.firstName}</b>
-          </button>
-          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a className="dropdown-item" href="/auth/myorders">
-              Orders
-            </a>
-            <a className="dropdown-item" href="/" onClick={logout}>
-              Logout
-            </a>
-          </div>
-        </div> */}
       </div>
     </Fragment>
   );
@@ -187,11 +167,7 @@ const Navbar = ({ auth: { isAuthenticated, user, loading }, logout }) => {
   return (
     <div className="navbar-div sticky real-nav">
       <nav className="navbar navbar-expand-lg">
-        {/* {!loading && ( */}
-        {/* <Fragment> */}
         {isAuthenticated ? authLinks : guestLinks}
-        {/* </Fragment> */}
-        {/* )} */}
       </nav>
     </div>
   );

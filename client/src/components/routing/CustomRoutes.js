@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import Alert from "../layout/Alert";
+// import Alert from "../layout/Alert";
 import NotFound from "../layout/NotFound";
 import PrivateRoute from "./PrivateRoute";
 import { getCurrentProfile } from "../../actions/profile";
@@ -21,7 +21,7 @@ function CustomRoutes({
   // console.log(user, "ITT?");
   return (
     <section className="container">
-      <Alert />
+      {/* <Alert /> */}
       <Routes>
         {user && (
           <Route

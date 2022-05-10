@@ -3,7 +3,12 @@ import { combineReducers } from "redux";
 // import auth from "./auth";
 // import profile from "./profile";
 
-import { auth, authRegisterReducer } from "./auth";
+import {
+  auth,
+  authRegisterReducer,
+  authLoginReducer,
+  // authLogoutReducer,
+} from "./auth";
 import {
   getAllItemsReducer,
   addItemReducer,
@@ -11,11 +16,7 @@ import {
   getItemByIdReducer,
 } from "./itemReducers";
 import { cartReducer } from "./cartReducer";
-import {
-  getAllUsersReducer,
-  // registerUserReducer,
-  // loginUserReducer,
-} from "./userReducers";
+import { getAllUsersReducer } from "./userReducers";
 import {
   placeOrderReducer,
   getUserOrdersReducer,
@@ -26,12 +27,12 @@ export default combineReducers({
   // alert,
   auth,
   authRegisterReducer: authRegisterReducer,
+  authLoginReducer: authLoginReducer,
+  // authLogoutReducer: authLogoutReducer,
   // profile,
   getAllItemsReducer: getAllItemsReducer,
   cartReducer: cartReducer,
-  // registerUserReducer: registerUserReducer,
   getAllUsersReducer: getAllUsersReducer,
-  // loginUserReducer: loginUserReducer,
   addItemReducer: addItemReducer,
   getItemByIdReducer: getItemByIdReducer,
   placeOrderReducer: placeOrderReducer,

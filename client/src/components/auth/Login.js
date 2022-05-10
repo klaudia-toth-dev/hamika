@@ -1,26 +1,33 @@
 import React, { Fragment, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/auth";
 
-// import Loading from "../components/Loading";
-// import Error from "../components/Error";
+import Loading from "../Loading";
+// import Success from "../Success";
+import Error from "../Error";
 
-const Login = ({ login, isAuthenticated }) => {
+const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
   const { email, password } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const loginState = useSelector((state) => state.authLoginReducer);
+  const { error, loading, isAuthenticated } = loginState;
+
+  const dispatch = useDispatch();
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    login(email, password);
+    dispatch(login(email, password));
   };
 
   if (isAuthenticated) {
@@ -35,8 +42,8 @@ const Login = ({ login, isAuthenticated }) => {
           <p className="lead">
             <i className="fas fa-user" /> Sign Into Your Account
           </p>
-          {/* {loading && <Loading />}
-          {error && <Error error="Invalid Creditentals" />} */}
+          {loading && <Loading />}
+          {error && <Error error={error} />}
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="auth-fields">
               <input
@@ -73,13 +80,4 @@ const Login = ({ login, isAuthenticated }) => {
   );
 };
 
-Login.propTypes = {
-  login: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
-};
-
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-export default connect(mapStateToProps, { login })(Login);
+export default Login;

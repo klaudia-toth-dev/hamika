@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setAlert } from "./alert";
+// import { setAlert } from "./alert";
 
 import {
   GET_PROFILE,
@@ -84,9 +84,9 @@ export const createProfile =
         payload: res.data,
       });
 
-      dispatch(
-        setAlert(edit ? "Profile Updated" : "Profile Created", "success")
-      );
+      // dispatch(
+      //   setAlert(edit ? "Profile Updated" : "Profile Created", "success")
+      // );
 
       if (!edit) {
         history.push("/dashboard");
@@ -94,9 +94,9 @@ export const createProfile =
     } catch (err) {
       const errors = err.response.data.errors;
 
-      if (errors) {
-        errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-      }
+      // if (errors) {
+      //   errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+      // }
 
       dispatch({
         type: PROFILE_ERROR,

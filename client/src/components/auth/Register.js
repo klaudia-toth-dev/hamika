@@ -1,10 +1,9 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link, Navigate } from "react-router-dom";
 import { register } from "../../actions/auth";
 import Loading from "../Loading";
-import Success from "../Success";
 import Error from "../Error";
 
 const Register = () => {
@@ -15,15 +14,15 @@ const Register = () => {
     password: "",
     password2: "",
   });
-
-  const dispatch = useDispatch();
-
-  const registerState = useSelector((state) => state.authRegisterReducer);
-  const { error, loading, success, isAuthenticated } = registerState;
   const { firstName, lastName, email, password, password2 } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const registerState = useSelector((state) => state.authRegisterReducer);
+  const { error, loading, isAuthenticated } = registerState;
+
+  const dispatch = useDispatch();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -47,7 +46,6 @@ const Register = () => {
             <i className="fas fa-user" /> Create Your Account
           </p>
           {loading && <Loading />}
-          {success && <Success success="User registered successfully" />}
           {error && <Error error={error} />}
 
           <form onSubmit={(e) => onSubmit(e)}>
