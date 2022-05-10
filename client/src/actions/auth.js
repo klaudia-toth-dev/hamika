@@ -37,6 +37,8 @@ export const loadUser = () => async (dispatch) => {
 export const register =
   ({ firstName, lastName, email, password }) =>
   async (dispatch) => {
+    dispatch({ type: "USER_REGISTER_REQUEST" });
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -47,22 +49,18 @@ export const register =
 
     try {
       const res = await axios.post("/api/users/register", body, config);
-      // const res = await axios.post("/api/users", body, config);
-
       dispatch({
-        type: REGISTER_SUCCESS,
+        type: "USER_REGISTER_SUCCESS",
         payload: res.data,
       });
-    } catch (err) {
-      const errors = err.response.data.errors;
+    } catch (error) {
+      const errors = error.response.data.errors;
 
       if (errors) {
-        errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+        errors.forEach((err) =>
+          dispatch({ type: "USER_REGISTER_ERROR", payload: err.msg })
+        );
       }
-
-      dispatch({
-        type: REGISTER_FAIL,
-      });
     }
   };
 

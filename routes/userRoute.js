@@ -20,24 +20,14 @@ router.get("/getallusers", auth, async (req, res) => {
   }
 });
 
-// router.post("/register", async(req, res) => {
-//     const { name, email, password } = req.body;
-//     const newUser = new User({ name, email, password });
-//     console.log(newUser);
-//     try {
-//         newUser.save();
-//         res.send("User registered successfully");
-//     } catch (error) {
-//         return res.status(400).json({ message: error });
-//     }
-// });
-
 // @route    POST api/users
 // @desc     Register user
 // @access   Public
 router.post(
   "/register",
   [
+    check("firstName", "All of the fields are required").notEmpty(),
+    check("lastName", "All of the fields are required").notEmpty(),
     check("email", "Please include a valid email").isEmail(),
     check(
       "password",
@@ -89,6 +79,7 @@ router.post(
           res.status(201).json({
             token,
             success: true,
+            isAdmin: user.isAdmin,
             message: "User created!",
             errors: [],
           });

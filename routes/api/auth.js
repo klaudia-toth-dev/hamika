@@ -13,7 +13,6 @@ const User = require("../../models/User");
 // @access   Private
 router.get("/", auth, async (req, res) => {
   try {
-    console.log("itt jarok?");
     const user = await User.findById(req.user.id).select("-password");
     res.status(200).json(user);
   } catch (err) {

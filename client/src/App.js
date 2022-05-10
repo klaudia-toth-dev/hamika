@@ -78,6 +78,7 @@ const App = () => {
   const pathName = location.pathname;
 
   useEffect(() => {
+    console.log("loaduser");
     store.dispatch(loadUser());
   }, []);
 

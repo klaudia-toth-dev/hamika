@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
-import alert from "./alert";
-import auth from "./auth";
-import profile from "./profile";
+// import alert from "./alert";
+// import auth from "./auth";
+// import profile from "./profile";
 
+import { auth, authRegisterReducer } from "./auth";
 import {
   getAllItemsReducer,
   addItemReducer,
@@ -12,8 +13,8 @@ import {
 import { cartReducer } from "./cartReducer";
 import {
   getAllUsersReducer,
-  registerUserReducer,
-  loginUserReducer,
+  // registerUserReducer,
+  // loginUserReducer,
 } from "./userReducers";
 import {
   placeOrderReducer,
@@ -22,9 +23,10 @@ import {
 } from "./orderReducers";
 
 export default combineReducers({
-  alert,
+  // alert,
   auth,
-  profile,
+  authRegisterReducer: authRegisterReducer,
+  // profile,
   getAllItemsReducer: getAllItemsReducer,
   cartReducer: cartReducer,
   // registerUserReducer: registerUserReducer,
