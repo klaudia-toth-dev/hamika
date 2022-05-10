@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { Link, Navigate } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 
 import welcomeImg1 from "../static/welcome.jpg";
@@ -7,17 +9,18 @@ import Map from "../components/Map";
 
 export default function WelcomeScreen() {
   const userState = useSelector((state) => state.auth);
-  const { user } = userState;
+  const { isAuthenticated, user } = userState;
 
-  useEffect(() => {
-    if (user && user.isAdmin) {
-      window.location.href = "/auth/admin";
-    }
-  }, []);
+  if (isAuthenticated && !user.isAdmin) {
+    return <Navigate to="/menu" />;
+  }
+
+  if (isAuthenticated && user.isAdmin) {
+    return <Navigate to="/auth/admin" />;
+  }
 
   return (
     <div className="welcomeScreen">
-      {/* {!currentUser.isAdmin && ( */}
       <div>
         <section className="home-section welcome-section" id="home">
           <img src={welcomeImg1} alt="welcome" className="welcomeImg1" />
@@ -163,7 +166,6 @@ export default function WelcomeScreen() {
             <p>Form on the picture</p>
           </section> */}
       </div>
-      {/* )} */}
     </div>
   );
 }
