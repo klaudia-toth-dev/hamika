@@ -1,6 +1,4 @@
 import axios from "axios";
-// import { setAlert } from "./alert";
-import { USER_LOADED, AUTH_ERROR } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 
 // Load User
@@ -14,12 +12,12 @@ export const loadUser = () => async (dispatch) => {
     const res = await axios.get("/api/auth");
 
     dispatch({
-      type: USER_LOADED,
+      type: "USER_LOADED",
       payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: AUTH_ERROR,
+      type: "AUTH_ERROR",
     });
   }
 };

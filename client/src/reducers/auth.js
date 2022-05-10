@@ -1,8 +1,6 @@
-import { USER_LOADED } from "../actions/types";
-
 export const auth = (state = { auth: [] }, action) => {
   switch (action.type) {
-    case USER_LOADED:
+    case "USER_LOADED":
       return {
         ...state,
         isAuthenticated: true,
@@ -75,15 +73,3 @@ export const authRegisterReducer = (state = { auth: [] }, action) => {
       return state;
   }
 };
-
-// export const authLogoutReducer = (state = { auth: [] }, action) => {
-//   switch (action.type) {
-//     case "USER_LOGOUT":
-//       localStorage.removeItem("token");
-//       return {
-//         loading: true,
-//       };
-//     default:
-//       return state;
-//   }
-// };

@@ -21,7 +21,6 @@ function CustomRoutes({
   // console.log(user, "ITT?");
   return (
     <section className="container">
-      {/* <Alert /> */}
       <Routes>
         {user && (
           <Route
