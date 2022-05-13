@@ -5,13 +5,30 @@ import Error from "../../../components/Error";
 import { getAllOrders } from "../../../actions/orderActions";
 import { deliverOrder } from "../../../actions/orderActions";
 
+// import io from "socket.io-client";
+
+// const ENDPOINT = "http://localhost:8000";
+// const socket = io.connect(ENDPOINT);
+
+import openSocket from "socket.io-client";
+
 export default function AdminOrders() {
   const dispatch = useDispatch();
   const getOrdersState = useSelector((state) => state.getAllOrdersReducer);
   const { orders, loading, error } = getOrdersState;
+  let socket;
+
   useEffect(() => {
+    socket = openSocket("http://localhost:5000");
     dispatch(getAllOrders());
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    socket.on("update order status", () => {
+      dispatch(getAllOrders());
+    });
+  });
+
   return (
     <div>
       {/* <h1>Orders List</h1> */}
@@ -26,7 +43,7 @@ export default function AdminOrders() {
             <th>User Id</th>
             <th>Price</th>
             <th>Date</th>
-            {/* <th>Status</th> */}
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -39,7 +56,7 @@ export default function AdminOrders() {
                   <td>{order.userId}</td>
                   <td>{order.orderAmount}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
-                  {/* <td>
+                  <td>
                     {order.isDelivered ? (
                       <p>Delivered</p>
                     ) : (
@@ -47,12 +64,16 @@ export default function AdminOrders() {
                         className="btn"
                         onClick={() => {
                           dispatch(deliverOrder(order._id));
+                          console.log("before socket");
+                          // socket.emit("example_message", "huhu");
+                          socket.emit("update order status");
+                          console.log("after socket");
                         }}
                       >
                         Deliver
                       </button>
                     )}
-                  </td> */}
+                  </td>
                 </tr>
               );
             })}

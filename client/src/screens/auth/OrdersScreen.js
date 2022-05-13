@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, connect } from "react-redux";
 import { getUserOrders } from "../../actions/orderActions";
 import Loading from "../../components/Loading";
 import Error from "../../components/Error";
-
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+import openSocket from "socket.io-client";
+let socket;
+
 const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
   // const userState = useSelector((state) => state.auth);
   // const { user } = userState;
@@ -21,12 +23,19 @@ const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
   // console.log(orderState, "orderState");
 
   useEffect(() => {
+    socket = openSocket("http://localhost:5000");
     // if (user && user.isAdmin) {
     //   window.location.href = "/admin";
     // }
     dispatch(getUserOrders());
-  }, []);
+  }, [dispatch]);
   // }, [user]);
+
+  useEffect(() => {
+    socket.on("update order status", () => {
+      dispatch(getUserOrders());
+    });
+  });
 
   return (
     <div className="order-screen">
@@ -66,6 +75,7 @@ const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
                     </p>
                     <p>Date: {order.createdAt.substring(0, 10)}</p>
                     {/* <p>Order Id: {order._id}</p> */}
+                    <p>Order Status: {order.isDelivered.toString()}</p>
                     <p>{order.note && <span>Comment: {order.note}</span>}</p>
                   </div>
                 </div>
