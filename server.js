@@ -9,7 +9,15 @@ const db = require("./db.js");
 
 // Init Middleware
 app.use(express.json({ extended: false }));
-app.use(helmet());
+// app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      "img-src": ["'self'", "https: data:"],
+    },
+  })
+);
 
 // Define Routes
 app.use("/api/auth", require("./routes/api/auth"));
