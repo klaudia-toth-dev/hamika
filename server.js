@@ -12,11 +12,11 @@ app.use(express.json({ extended: false }));
 // app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
-    useDefaults: true,
-    directives: {
-      "img-src": ["'self'", "https: data:"],
-      "script-src": ["'self'", "https: data:"],
-    },
+    useDefaults: false,
+    // directives: {
+    //   "img-src": ["'self'", "https: data:"],
+    //   "script-src": ["'self'", "https: data:"],
+    // },
   })
 );
 
