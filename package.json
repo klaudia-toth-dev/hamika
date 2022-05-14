@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "serve": "nodemon server.js",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install --save --legacy-peer-deps && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
