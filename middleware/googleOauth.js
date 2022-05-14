@@ -10,9 +10,8 @@ const client = new OAuth2Client(
    */
   "postmessage"
 );
-module.exports = client;
 
-module.exports.getProfileInfo = async (code) => {
+module.exports = async (code) => {
   const idToken = code;
   const ticket = await client.verifyIdToken({
     idToken,

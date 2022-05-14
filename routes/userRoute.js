@@ -4,9 +4,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
-const { GoogleAuth } = require("google-auth-library");
+// const { GoogleAuth } = require("google-auth-library");
 const googleOAuth = require("../middleware/googleOAuth");
-const client = new GoogleAuth(process.env.GOOGLE_CLIENT_ID);
+// const client = new GoogleAuth(process.env.GOOGLE_CLIENT_ID);
 
 const User = require("../models/userModel");
 
@@ -151,7 +151,7 @@ router.post(
 router.post("/googleLogin", async (req, res) => {
   try {
     const code = req.body.data;
-    const profile = await googleOAuth.getProfileInfo(code);
+    const profile = await googleOAuth(code);
 
     const { email_verified, email } = profile;
 
