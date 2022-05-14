@@ -24,22 +24,22 @@ app.use(
     useDefaults: true,
     directives: {
       "default-src": ["'self'"],
-      "script-src": ["'self'"],
       "img-src": ["'self'", "https: data:"],
-      "style-src": [
-        "'self'",
-        "https://fonts.googleapis.com",
-        "'unsafe-inline'",
-      ],
-      "connect-src": [
-        "'self'",
-        "https://ourDomain.us.auth0.com/oauth/token",
-        "https://ourDomain.azure-api.net/fields/request/paths/invoke",
-      ],
-      "font-src": ["'self'", "https://fonts.gstatic.com"],
-      "object-src": ["'self'"],
-      "media-src": ["'self'"],
-      "frame-src": ["'self'", "ourDomain.us.auth0.com"],
+      "script-src": ["'self'", "trusted-cdn.com"],
+      // "style-src": [
+      //   "'self'",
+      //   "https://fonts.googleapis.com",
+      //   "'unsafe-inline'",
+      // ],
+      // "connect-src": [
+      //   "'self'",
+      //   "https://ourDomain.us.auth0.com/oauth/token",
+      //   "https://ourDomain.azure-api.net/fields/request/paths/invoke",
+      // ],
+      // "font-src": ["'self'", "https://fonts.gstatic.com"],
+      // "object-src": ["'self'"],
+      // "media-src": ["'self'"],
+      // "frame-src": ["'self'", "ourDomain.us.auth0.com"],
     },
   })
 );
