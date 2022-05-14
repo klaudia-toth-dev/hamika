@@ -575,6 +575,22 @@ tr {
   width: 60%;
 }
 
+.order-status-select{
+  height: 100%;
+  background-color:rgb(245, 233, 216) !important;
+  color: rgb(10, 0, 0);
+  width:  9rem;
+  font-size: 14px;
+  padding: 0.5rem 0.3rem;
+}
+
+.order-status-select option{
+  padding: 0.5rem 0.3rem;
+}
+
+.order-status-select option:focus{
+  background-color: inherit !important;
+}
 
 /* ORDERS SCREEN */
 .order-screen{
@@ -589,7 +605,20 @@ tr {
 .order-card p{
   margin-bottom: 0;
 }
-
+.order-stat-icon{
+  width: 18px;
+  height: 18px;
+}
+.order-stat-item{
+  color: rgb(163, 145, 118) !important;
+}
+.order-stat-item.actual-stat{
+  color: rgb(245, 233, 216) !important;
+}
+.order-stat-icon::before{
+  display: flex;
+  justify-content: center;
+}
 /* CART SCREEN */
 .cart-screen{
   padding-top: 1.5rem;

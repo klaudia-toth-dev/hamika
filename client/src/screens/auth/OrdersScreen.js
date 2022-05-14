@@ -42,48 +42,138 @@ const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
 
   return (
     <div className="order-screen">
-      <h1>My Orders</h1>
       <div className="row ">
         {loading && <Loading />}
         {error && <Error error="Something went wrong" />}
+        <h1>Actual Orders</h1>
         {orders &&
           orders.map((order) => {
-            return (
-              <div className="col-md-12 shadow-sm p-4 mb-5 rounded order-card">
-                <div className="flex-container w-100">
-                  <div className="text-left w-100 m-1 ">
-                    <h3>Items</h3>
-                    {order.orderItems.map((item) => {
-                      return (
-                        <div>
-                          <p>
-                            {item.name} - {item.portion} * {item.quantity} *{" "}
-                            {item.price}{" "}
-                          </p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <div className="text-left w-100 m-1">
-                    <h3>Address</h3>
-                    <p>Street: {order.shippingAddress.street}</p>
-                    <p>City: {order.shippingAddress.city}</p>
-                    <p>Country: {order.shippingAddress.country}</p>
-                    <p>Zip: {order.shippingAddress.zip}</p>
-                  </div>
-                  <div className="text-left w-100 m-1">
-                    <h3>Order Info</h3>
-                    <p>
-                      <b>Price: {order.orderAmount}</b>
-                    </p>
-                    <p>Date: {order.createdAt.substring(0, 10)}</p>
-                    {/* <p>Order Id: {order._id}</p> */}
-                    <p>Order Status: {order.isDelivered.toString()}</p>
-                    <p>{order.note && <span>Comment: {order.note}</span>}</p>
+            if (!order.isDelivered) {
+              return (
+                <div className="col-md-12 shadow-sm p-4 mb-3 rounded order-card">
+                  <div className="flex-container w-100">
+                    <div className="text-left w-100 m-1 ">
+                      <h3>Items</h3>
+                      {order.orderItems.map((item) => {
+                        return (
+                          <div>
+                            <p>
+                              <b>{item.name}</b> - {item.portion} *{" "}
+                              {item.quantity} * {item.price}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="text-left w-100 m-1">
+                      <h3>Address</h3>
+                      <p>Street: {order.shippingAddress.street}</p>
+                      <p>City: {order.shippingAddress.city}</p>
+                      <p>Country: {order.shippingAddress.country}</p>
+                      <p>Zip: {order.shippingAddress.zip}</p>
+                    </div>
+                    <div className="text-left w-100 m-1">
+                      <h3>Order Info</h3>
+                      <p>
+                        <b>Price: {order.orderAmount}</b>
+                      </p>
+                      <p>Date: {order.createdAt.substring(0, 10)}</p>
+                      {/* <p>Order Id: {order._id}</p> */}
+                      <p>{order.note && <span>Comment: {order.note}</span>}</p>
+                    </div>
+                    <div className="text-left w-100 m-1">
+                      <h3>Order Status</h3>
+                      {/* <p>{order.status}</p> */}
+                      {}
+                      <p
+                        className={`order-stat-item  ${
+                          order.status === "Order placed" ? "actual-stat" : ""
+                        }`}
+                      >
+                        <i className="fa-solid fa-clipboard order-stat-icon"></i>{" "}
+                        <span className="ml-2">Order placed</span>
+                      </p>
+                      <p
+                        className={`order-stat-item  ${
+                          order.status === "Order confirmed"
+                            ? "actual-stat"
+                            : ""
+                        }`}
+                      >
+                        <i className="fa-solid fa-clipboard-check order-stat-icon"></i>{" "}
+                        <span className="ml-2">Order confirmed</span>
+                      </p>
+                      <p
+                        className={`order-stat-item  ${
+                          order.status === "Preparation" ? "actual-stat" : ""
+                        }`}
+                      >
+                        <i className="fa-solid fa-bowl-food order-stat-icon"></i>{" "}
+                        <span className="ml-2">Preparation</span>
+                      </p>
+                      <p
+                        className={`order-stat-item  ${
+                          order.status === "Delivery" ? "actual-stat" : ""
+                        }`}
+                      >
+                        <i className="fa-solid fa-truck order-stat-icon"></i>{" "}
+                        <span className="ml-2">Delivery</span>
+                      </p>
+                      <p
+                        className={`order-stat-item  ${
+                          order.status === "Completed" ? "actual-stat" : ""
+                        }`}
+                      >
+                        <i className="fa-solid fa-face-smile order-stat-icon"></i>{" "}
+                        <span className="ml-2">Completed</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
+              );
+            }
+          })}
+        <h1 className="mt-5">Previous Orders</h1>
+        {orders &&
+          orders.map((order) => {
+            if (order.isDelivered) {
+              return (
+                <div className="col-md-12 shadow-sm p-4 mb-3 rounded order-card">
+                  <div className="flex-container w-100">
+                    <div className="text-left w-100 m-1 ">
+                      <h3>Items</h3>
+                      {order.orderItems.map((item) => {
+                        return (
+                          <div>
+                            <p>
+                              {item.name} - {item.portion} * {item.quantity} *
+                              {item.price}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="text-left w-100 m-1">
+                      <h3>Address</h3>
+                      <p>Street: {order.shippingAddress.street}</p>
+                      <p>City: {order.shippingAddress.city}</p>
+                      <p>Country: {order.shippingAddress.country}</p>
+                      <p>Zip: {order.shippingAddress.zip}</p>
+                    </div>
+                    <div className="text-left w-100 m-1">
+                      <h3>Order Info</h3>
+                      <p>
+                        <b>Price: {order.orderAmount}</b>
+                      </p>
+                      <p>Date: {order.createdAt.substring(0, 10)}</p>
+                      {/* <p>Order Id: {order._id}</p> */}
+                      <p>Order Status: {order.isDelivered.toString()}</p>
+                      <p>{order.note && <span>Comment: {order.note}</span>}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
           })}
       </div>
     </div>

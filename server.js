@@ -29,10 +29,10 @@ const io = require("socket.io")(server, {
 });
 io.on("connection", (socket) => {
   // console.log(socket);
-  console.log("Connection established!");
-  socket.on("disconnect", function () {
-    console.log("Client Disconnected");
-  });
+  // console.log("Connection established!");
+  // socket.on("disconnect", function () {
+  //   console.log("Client Disconnected");
+  // });
   socket.on("update order status", () => {
     socket.emit("update order status");
     socket.broadcast.emit("update order status");
