@@ -4,8 +4,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
+const googleOAuth = require("../middleware/googleOauth");
 // const { GoogleAuth } = require("google-auth-library");
-const googleOAuth = require("../middleware/googleOAuth");
 // const client = new GoogleAuth(process.env.GOOGLE_CLIENT_ID);
 
 const User = require("../models/userModel");
