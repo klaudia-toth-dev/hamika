@@ -37,7 +37,7 @@ const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
         {orders &&
           orders.map((order) => {
             return (
-              <div className="col-md-12 shadow-sm p-4 mb-5 rounded order-card">
+              <div className="col-md-12 shadow-sm p-4 mb-3 rounded order-card">
                 <div className="flex-container w-100">
                   <div className="text-left w-100 m-1 ">
                     <h3>Items</h3>

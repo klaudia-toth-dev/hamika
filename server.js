@@ -15,6 +15,7 @@ app.use(
     useDefaults: true,
     directives: {
       "img-src": ["'self'", "https: data:"],
+      "script-src": ["'self'", "https: data:"],
     },
   })
 );
