@@ -25,7 +25,11 @@ app.use(
     directives: {
       "default-src": ["'self'"],
       "img-src": ["'self'", "https: data:"],
-      "script-src": ["'self'", "trusted-cdn.com"],
+      "script-src": [
+        "'self'",
+        "trusted-cdn.com",
+        "https://apis.google.com/js/api.js",
+      ],
       "style-src": [
         "'self'",
         // "https://fonts.googleapis.com",
