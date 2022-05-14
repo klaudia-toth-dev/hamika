@@ -20,23 +20,25 @@ app.use(express.json({ extended: false }));
 //   })
 // );
 app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'"],
-        styleSrc: ["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
-        imgSrc: ["'self'", "data:"],
-        connectSrc: [
-          "'self'",
-          "https://ourDomain.us.auth0.com/oauth/token",
-          "https://ourDomain.azure-api.net/fields/request/paths/invoke",
-        ],
-        fontSrc: ["'self'", "https://fonts.gstatic.com"],
-        objectSrc: ["'self'"],
-        mediaSrc: ["'self'"],
-        frameSrc: ["'self'", "ourDomain.us.auth0.com"],
-      },
+  helmet.contentSecurityPolicy({
+    directives: {
+      "default-src": ["'self'"],
+      "script-rc": ["'self'"],
+      "style-src": [
+        "'self'",
+        "https://fonts.googleapis.com",
+        "'unsafe-inline'",
+      ],
+      "img-src": ["'self'", "data:"],
+      "connect-src": [
+        "'self'",
+        "https://ourDomain.us.auth0.com/oauth/token",
+        "https://ourDomain.azure-api.net/fields/request/paths/invoke",
+      ],
+      "font-src": ["'self'", "https://fonts.gstatic.com"],
+      "object-src": ["'self'"],
+      "media-src": ["'self'"],
+      "frame-src": ["'self'", "ourDomain.us.auth0.com"],
     },
   })
 );
