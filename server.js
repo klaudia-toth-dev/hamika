@@ -10,13 +10,18 @@ const db = require("./db.js");
 // Init Middleware
 app.use(express.json({ extended: false }));
 // app.use(helmet());
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     useDefaults: true,
+//     directives: {
+//       "img-src": ["'self'", "https: data:"],
+//       "script-src": ["'self'", "https: data:"],
+//     },
+//   })
+// );
 app.use(
-  helmet.contentSecurityPolicy({
-    useDefaults: false,
-    // directives: {
-    //   "img-src": ["'self'", "https: data:"],
-    //   "script-src": ["'self'", "https: data:"],
-    // },
+  helmet({
+    contentSecurityPolicy: false,
   })
 );
 
