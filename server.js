@@ -26,11 +26,11 @@ app.use(
       "default-src": ["'self'"],
       "img-src": ["'self'", "https: data:"],
       "script-src": ["'self'", "trusted-cdn.com"],
-      // "style-src": [
-      //   "'self'",
-      //   "https://fonts.googleapis.com",
-      //   "'unsafe-inline'",
-      // ],
+      "style-src": [
+        "'self'",
+        // "https://fonts.googleapis.com",
+        "'unsafe-inline'",
+      ],
       // "connect-src": [
       //   "'self'",
       //   "https://ourDomain.us.auth0.com/oauth/token",
