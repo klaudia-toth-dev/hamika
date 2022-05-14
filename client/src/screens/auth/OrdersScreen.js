@@ -22,8 +22,8 @@ const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
 
   // console.log(orderState, "orderState");
 
+  socket = openSocket("http://localhost:5000");
   useEffect(() => {
-    socket = openSocket("http://localhost:5000");
     // if (user && user.isAdmin) {
     //   window.location.href = "/admin";
     // }
@@ -33,6 +33,9 @@ const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
 
   useEffect(() => {
     socket.on("update order status", () => {
+      dispatch(getUserOrders());
+    });
+    socket.on("place order", () => {
       dispatch(getUserOrders());
     });
   });

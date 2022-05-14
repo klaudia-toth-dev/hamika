@@ -16,15 +16,17 @@ export default function AdminOrders() {
   const dispatch = useDispatch();
   const getOrdersState = useSelector((state) => state.getAllOrdersReducer);
   const { orders, loading, error } = getOrdersState;
-  let socket;
+  const socket = openSocket("http://localhost:5000");
 
   useEffect(() => {
-    socket = openSocket("http://localhost:5000");
     dispatch(getAllOrders());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     socket.on("update order status", () => {
+      dispatch(getAllOrders());
+    });
+    socket.on("place order", () => {
       dispatch(getAllOrders());
     });
   });
@@ -34,7 +36,6 @@ export default function AdminOrders() {
       {/* <h1>Orders List</h1> */}
       {loading && <Loading />}
       {error && <Error error="something went wrong" />}
-
       <table className="table styled-table">
         <thead>
           <tr>

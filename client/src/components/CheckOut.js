@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import { placeOrder } from "../actions/orderActions";
 import Loading from "../components/Loading";
 import Success from "../components/Success";
 import Error from "../components/Error";
+import { useNavigate } from "react-router-dom";
+
+import openSocket from "socket.io-client";
+
 export default function CheckOut({ subtotal, note }) {
   const orderState = useSelector((state) => state.placeOrderReducer);
   const { loading, error, success } = orderState;
 
   const dispatch = useDispatch();
-  function tokenHandler(token) {
-    console.log(token);
-    dispatch(placeOrder(token, subtotal, note));
-  }
-  console.log(subtotal);
+  const navigate = useNavigate();
+
+  const socket = openSocket("http://localhost:5000");
+
+  useEffect(() => {
+    // if (user && user.isAdmin) {
+    //   window.location.href = "/admin";
+    // }
+  }, []);
+  // }, [user]);
+
   return (
     <div>
       {loading && <Loading />}
@@ -34,4 +44,11 @@ export default function CheckOut({ subtotal, note }) {
       </StripeCheckout>
     </div>
   );
+
+  function tokenHandler(token) {
+    dispatch(placeOrder(token, subtotal, note, navigate));
+    console.log("before socket emit");
+    socket.emit("place order");
+    console.log("before socket emit");
+  }
 }

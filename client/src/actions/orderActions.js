@@ -1,6 +1,6 @@
 import axios from "axios";
 export const placeOrder =
-  (token, subtotal, note) => async (dispatch, getState) => {
+  (token, subtotal, note, navigate) => async (dispatch, getState) => {
     dispatch({ type: "PLACE_OREDER_REQUEST" });
     const currentUser = getState().auth.user;
     const cartItems = getState().cartReducer.cartItems;
@@ -13,10 +13,12 @@ export const placeOrder =
         note,
       });
       dispatch({ type: "PLACE_ORDER_SUCCESS" });
-      console.log(response.note, "orderAction");
       localStorage.removeItem("cartItems");
-      window.location.href = "/auth/myorders";
       console.log(response);
+      console.log("navigate", navigate);
+      // navigate("/auth/myorders".replace("/cart", "/"), { replace: true });
+      navigate("/auth/myorders");
+      // window.location.href = "/auth/myorders";
     } catch (error) {
       dispatch({ type: "PLACE_ORDER_FAILED" });
 

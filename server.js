@@ -24,23 +24,27 @@ app.use("/api/users/", require("./routes/userRoute"));
 app.use("/api/orders/", require("./routes/ordersRoute"));
 
 // Socket.io
-const io = require("socket.io")(server, { cors: { origin: "*" } });
+const io = require("socket.io")(server, {
+  cors: { origin: "http://localhost:3000", methods: ["GET", "POST"] },
+});
 io.on("connection", (socket) => {
   // console.log(socket);
   console.log("Connection established!");
-  // socket.on("disconnect", function () {
-  //   console.log("Client Disconnected");
-  // });
-  // socket.on("example_message", function (msg) {
-  //   console.log("message: " + msg);
-  // });
+  socket.on("disconnect", function () {
+    console.log("Client Disconnected");
+  });
   socket.on("update order status", () => {
     socket.emit("update order status");
     socket.broadcast.emit("update order status");
     // socket.broadcast.emit("update");
   });
+  socket.on("place order", () => {
+    console.log("place order");
+    socket.emit("place order");
+    socket.broadcast.emit("place order");
+    // socket.broadcast.emit("update");
+  });
 });
-
 // io.on("connection", function (socket) {
 //   console.log("a user connected");
 //   socket.on("disconnect", function () {
