@@ -32,10 +32,9 @@ export default function AdminUsers() {
             users.map((user) => {
               return (
                 <tr>
-                  <td>{user.name}</td>
+                  <td>{user.firstName + " " + user.lastName}</td>
                   <td>{user.email}</td>
                   <td>{user.isAdmin ? "Admin" : "User"}</td>
-                  {/* <td></td> */}
                 </tr>
               );
             })}

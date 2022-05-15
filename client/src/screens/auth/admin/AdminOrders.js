@@ -7,17 +7,50 @@ import { deliverOrder } from "../../../actions/orderActions";
 
 export default function AdminOrders() {
   const dispatch = useDispatch();
+
   const getOrdersState = useSelector((state) => state.getAllOrdersReducer);
-  const { orders, loading, error } = getOrdersState;
+  const { orders, numberOfPages, loading, error } = getOrdersState;
+
+  const [pageNumber, setPageNumber] = useState(0);
+  const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
+
   useEffect(() => {
-    dispatch(getAllOrders());
-  }, []);
+    dispatch(getAllOrders(pageNumber));
+  }, [dispatch, pageNumber]);
+
   return (
     <div>
       {/* <h1>Orders List</h1> */}
       {loading && <Loading />}
       {error && <Error error="something went wrong" />}
 
+      {/* {pages.map((pageIndex) => {
+        <button>{pageIndex + 1}</button>;
+      })} */}
+      <div className="d-flex pagination">
+        {/* <p>Page {pageNumber + 1}</p> */}
+        <div>
+          <button className="btn-paging " onClick={goToPrevious}>
+            Previous
+          </button>
+          {pages.map((pageIndex) => {
+            return (
+              <button
+                key={pageIndex}
+                className={`btn-paging numbers ${
+                  pageIndex === pageNumber ? "active" : ""
+                }`}
+                onClick={() => setPageNumber(pageIndex)}
+              >
+                {pageIndex + 1}
+              </button>
+            );
+          })}
+          <button className="btn-paging" onClick={goToNext}>
+            Next
+          </button>
+        </div>
+      </div>
       <table className="table styled-table">
         <thead>
           <tr>
@@ -33,7 +66,7 @@ export default function AdminOrders() {
           {orders &&
             orders.map((order) => {
               return (
-                <tr>
+                <tr key={order._id}>
                   <td>{order._id}</td>
                   <td>{order.email}</td>
                   <td>{order.userId}</td>
@@ -60,4 +93,11 @@ export default function AdminOrders() {
       </table>
     </div>
   );
+
+  function goToPrevious() {
+    setPageNumber(Math.max(0, pageNumber - 1));
+  }
+  function goToNext() {
+    setPageNumber(Math.min(numberOfPages - 1, pageNumber + 1));
+  }
 }

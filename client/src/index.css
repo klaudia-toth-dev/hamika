@@ -575,6 +575,69 @@ tr {
   width: 60%;
 }
 
+.pagination{
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-paging {
+  background-color: transparent !important;
+  color: rgb(163, 145, 118) !important;
+  padding: 0.5rem 1.5rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  transition: all 0.5s ease-in-out !important;
+  border-radius: 8px;
+}
+.btn-paging.active{
+    color: rgb(245, 233, 216) !important;
+}
+.btn-paging:hover{
+  background-color:rgb(35,35,35) !important;
+}
+.btn-paging.numbers:hover{
+  background-color: transparent !important;
+  color: rgb(245, 233, 216) !important;
+  text-decoration: overline !important;
+}
+.btn-paging:focus{
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.admin-w-card-container {
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.admin-w-card{
+  background-color:rgb(35,35,35) !important;
+  height: 12rem;
+  margin-bottom: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 3rem;
+  text-align: center;
+  font-size: 1.2rem;
+
+}
+
+.admin-w-card:hover{
+  background-color: rgb(163, 145, 118) !important;
+  color: rgb(245, 233, 216) !important;
+  transition: all 0.3s ease-in-out;
+}
+
+.admin-w-card:hover i{
+  color: rgb(245, 233, 216) !important;
+  transition: all 0.3s ease-in-out;
+}
+.admin-w-card i{
+  color: rgb(163, 145, 118) !important;
+  margin-top: 1.5rem;
+
+}
 
 /* ORDERS SCREEN */
 .order-screen{

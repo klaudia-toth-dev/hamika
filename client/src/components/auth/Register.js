@@ -53,7 +53,7 @@ const Register = () => {
               <input
                 className="form-control"
                 type="text"
-                placeholder="firstName"
+                placeholder="First Name"
                 name="firstName"
                 value={firstName}
                 onChange={(e) => onChange(e)}
@@ -61,7 +61,7 @@ const Register = () => {
               <input
                 className="form-control"
                 type="text"
-                placeholder="lastName"
+                placeholder="Last Name"
                 name="lastName"
                 value={lastName}
                 onChange={(e) => onChange(e)}
