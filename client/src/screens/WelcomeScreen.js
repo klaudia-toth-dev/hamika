@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
+import React, { useEffect, Fragment } from "react";
+import { Navigate } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -7,9 +7,23 @@ import welcomeImg1 from "../static/welcome.jpg";
 import welcomeImg2 from "../static/welcome2.jpg";
 import Map from "../components/Map";
 
+import { getAllItems } from "../actions/itemActions";
+
+import Loading from "../components/Loading";
+import Error from "../components/Error";
+
 export default function WelcomeScreen() {
   const userState = useSelector((state) => state.auth);
   const { isAuthenticated, user } = userState;
+
+  const itemsState = useSelector((state) => state.getAllItemsReducer);
+  const { items, error, loading } = itemsState;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllItems());
+  }, [dispatch]);
 
   if (isAuthenticated && !user.isAdmin) {
     return <Navigate to="/menu" />;
@@ -40,51 +54,22 @@ export default function WelcomeScreen() {
           </div>
           <img src={welcomeImg2} alt="welcome2" className="welcomeImg2" />
         </section>
-        <section className="menu-section welcome-section" id="menu">
-          <h1>MENU</h1>
-          <h3>LOREM IPSUM</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel
-            semper erat, vitae iaculis odio. In nisi tortor, iaculis sed porta
-            elementum, porttitor eget eros.
-          </p>
-          <h3>LOREM IPSUM</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel
-            semper erat, vitae iaculis odio. In nisi tortor, iaculis sed porta
-            elementum, porttitor eget eros.
-          </p>
-          <h3>LOREM IPSUM</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel
-            semper erat, vitae iaculis odio. In nisi tortor, iaculis sed porta
-            elementum, porttitor eget eros.
-          </p>
-          <h3>LOREM IPSUM</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel
-            semper erat, vitae iaculis odio. In nisi tortor, iaculis sed porta
-            elementum, porttitor eget eros.
-          </p>
-          <h3>LOREM IPSUM</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel
-            semper erat, vitae iaculis odio. In nisi tortor, iaculis sed porta
-            elementum, porttitor eget eros.
-          </p>
-          <h3>LOREM IPSUM</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel
-            semper erat, vitae iaculis odio. In nisi tortor, iaculis sed porta
-            elementum, porttitor eget eros.
-          </p>
-          <h3>LOREM IPSUM</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel
-            semper erat, vitae iaculis odio. In nisi tortor, iaculis sed porta
-            elementum, porttitor eget eros.
-          </p>
-        </section>
+        {loading && <Loading />}
+        {error && <Error error="Something went wrong" />}
+        {items && (
+          <section className="menu-section welcome-section" id="menu">
+            <h1>MENU</h1>
+            {items &&
+              items.map((item) => {
+                return (
+                  <Fragment>
+                    <h3>{item.name}</h3>
+                    <p>{item.description}</p>
+                  </Fragment>
+                );
+              })}
+          </section>
+        )}
         <section className="about-section welcome-section" id="about">
           <h1>WHO WE ARE</h1>
           <p>Pictures on the left side of the screen.</p>
