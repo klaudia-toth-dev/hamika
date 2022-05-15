@@ -56,9 +56,7 @@ router.post("/placeorder", auth, async (req, res) => {
 });
 
 router.post("/getuserorders", auth, async (req, res) => {
-  console.log("miuz?");
   const { userId } = req.body;
-  console.log(userId, "from request");
   try {
     const orders = await Order.find({ userId: userId }).sort({ _id: -1 });
     res.send(orders);
@@ -70,8 +68,14 @@ module.exports = router;
 
 router.get("/getallorders", auth, async (req, res) => {
   try {
-    const orders = await Order.find({});
-    res.send(orders);
+    const PAGE_SIZE = 10;
+    const page = parseInt(req.query.page || "0");
+    const total = await Order.countDocuments({});
+    // console.log(Math.ceil(total / PAGE_SIZE));
+    const orders = await Order.find({})
+      .limit(PAGE_SIZE)
+      .skip(PAGE_SIZE * page);
+    res.send({ numberOfPages: Math.ceil(total / PAGE_SIZE), orders });
   } catch (error) {
     return res.status(400).json({ message: "Something went wrong" });
   }

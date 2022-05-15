@@ -39,12 +39,13 @@ export const getUserOrders = () => async (dispatch, getState) => {
   }
 };
 
-export const getAllOrders = () => async (dispatch, getState) => {
+export const getAllOrders = (pageNumber) => async (dispatch, getState) => {
   // const currentUser = getState().auth.user;
   dispatch({ type: "GET_ALL_ORDERS_REQUEST" });
-
   try {
-    const response = await axios.get("/api/orders/getallorders");
+    const response = await axios.get("/api/orders/getallorders", {
+      params: { page: pageNumber },
+    });
     console.log(response);
     dispatch({ type: "GET_ALL_ORDERS_SUCCESS", payload: response.data });
   } catch (error) {

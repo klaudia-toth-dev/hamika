@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import AdminWelcome from "./admin/AdminWelcome";
 import AdminAddItem from "./admin/AdminAddItem";
@@ -18,8 +18,8 @@ export default function AdminScreen() {
               <Route path="/" element={<AdminWelcome />} />
               <Route path="/users" element={<AdminUsers />} />
               <Route path="/menu" element={<AdminMenu />} />
-              <Route path="/additem" element={<AdminAddItem />} />
               <Route path="/orders" element={<AdminOrders />} />
+              <Route path="/additem" element={<AdminAddItem />} />
               <Route path="/edititem/:id" element={<AdminEditItem />} />
             </Routes>
           </div>

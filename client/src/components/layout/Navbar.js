@@ -45,12 +45,12 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
           </li>
           <li className="nav-item mr-3">
             <div className="nav-link">
-              <Link to="/auth/admin/additem">Add Item</Link>
+              <Link to="/auth/admin/orders">Orders</Link>
             </div>
           </li>
           <li className="nav-item mr-3">
             <div className="nav-link">
-              <Link to="/auth/admin/orders">Orders</Link>
+              <Link to="/auth/admin/additem">Add Item</Link>
             </div>
           </li>
 
