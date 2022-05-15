@@ -1,7 +1,5 @@
 const express = require("express");
 const path = require("path");
-// const helmet = require("helmet");
-
 const app = express();
 
 // Connect Database
@@ -9,50 +7,11 @@ const db = require("./db.js");
 
 // Init Middleware
 app.use(express.json({ extended: false }));
-// app.use(helmet());
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     useDefaults: true,
-//     directives: {
-//       "img-src": ["'self'", "https: data:"],
-//       "script-src": ["'self'", "https: data:"],
-//     },
-//   })
-// );
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     useDefaults: true,
-//     directives: {
-//       "default-src": ["'self'"],
-//       "img-src": ["'self'", "https: data:"],
-//       "script-src": [
-//         "'self'",
-//         "trusted-cdn.com",
-//         "https://apis.google.com/js/api.js",
-//       ],
-//       "style-src": [
-//         "'self'",
-//         // "https://fonts.googleapis.com",
-//         "'unsafe-inline'",
-//       ],
-//       // "connect-src": [
-//       //   "'self'",
-//       //   "https://ourDomain.us.auth0.com/oauth/token",
-//       //   "https://ourDomain.azure-api.net/fields/request/paths/invoke",
-//       // ],
-//       // "font-src": ["'self'", "https://fonts.gstatic.com"],
-//       // "object-src": ["'self'"],
-//       // "media-src": ["'self'"],
-//       // "frame-src": ["'self'", "ourDomain.us.auth0.com"],
-//     },
-//   })
-// );
 
 // Define Routes
 app.use("/api/auth", require("./routes/api/auth"));
 const itemsRoute = require("./routes/itemsRoute");
 const userRoute = require("./routes/userRoute");
-// const profile = require("./routes/api/profile");
 const ordersRoute = require("./routes/ordersRoute");
 
 app.use("/api/items/", itemsRoute);
