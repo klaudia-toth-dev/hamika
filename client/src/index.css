@@ -620,7 +620,6 @@ tr {
   padding: 3rem;
   text-align: center;
   font-size: 1.2rem;
-
 }
 
 .admin-w-card:hover{
@@ -636,6 +635,7 @@ tr {
 .admin-w-card i{
   color: rgb(163, 145, 118) !important;
   margin-top: 1.5rem;
+}
 
 .order-status-select{
   height: 100%;
