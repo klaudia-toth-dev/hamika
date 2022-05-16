@@ -1,6 +1,6 @@
 import axios from "axios";
 export const placeOrder =
-  (token, subtotal, note) => async (dispatch, getState) => {
+  (token, subtotal, note, navigate) => async (dispatch, getState) => {
     dispatch({ type: "PLACE_OREDER_REQUEST" });
     const currentUser = getState().auth.user;
     const cartItems = getState().cartReducer.cartItems;
@@ -13,10 +13,12 @@ export const placeOrder =
         note,
       });
       dispatch({ type: "PLACE_ORDER_SUCCESS" });
-      console.log(response.note, "orderAction");
       localStorage.removeItem("cartItems");
-      window.location.href = "/auth/myorders";
       console.log(response);
+      console.log("navigate", navigate);
+      // navigate("/auth/myorders".replace("/cart", "/"), { replace: true });
+      navigate("/auth/myorders");
+      // window.location.href = "/auth/myorders";
     } catch (error) {
       dispatch({ type: "PLACE_ORDER_FAILED" });
 
@@ -53,14 +55,16 @@ export const getAllOrders = (pageNumber) => async (dispatch, getState) => {
   }
 };
 
-export const deliverOrder = (orderId) => async (dispatch) => {
+export const deliverOrder = (orderId, orderStatus) => async (dispatch) => {
   try {
     const response = await axios.post("/api/orders/deliverorder", {
       orderId: orderId,
+      orderStatus: orderStatus,
     });
-    console.log(response);
-    alert("Order delivered");
+    console.log(response, "deliverOrder");
+    // alert("Order delivered");
     const orders = await axios.get("/api/orders/getallorders");
+    console.log(orders);
     dispatch({ type: "GET_ALL_ORDERS_SUCCCESS", payload: orders.data });
   } catch (error) {
     console.log(error);

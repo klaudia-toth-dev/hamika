@@ -36,7 +36,7 @@ function CustomRoutes({ auth: { user } }) {
             }
           />
         )}
-        <Route element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </section>
   );

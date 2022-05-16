@@ -82,14 +82,18 @@ router.get("/getallorders", auth, async (req, res) => {
 });
 module.exports = router;
 
-// router.post("/deliverorder", async (req, res) => {
-//   const orderId = req.body.orderId;
-//   try {
-//     const order = await Order.findOne({ _id: orderId });
-//     order.isDelivered = true;
-//     await order.save();
-//     res.send("Order Delivered Successfully");
-//   } catch (error) {
-//     return res.status(400).json({ message: "Something went wrong" });
-//   }
-// });
+router.post("/deliverorder", async (req, res) => {
+  const orderId = req.body.orderId;
+  const orderStatus = req.body.orderStatus;
+  try {
+    const order = await Order.findOne({ _id: orderId });
+    order.status = orderStatus;
+    if (order.status === "Complete") {
+      order.isDelivered = true;
+    }
+    await order.save();
+    res.send("Order Status changed Successfully");
+  } catch (error) {
+    return res.status(400).json({ message: "Something went wrong" });
+  }
+});

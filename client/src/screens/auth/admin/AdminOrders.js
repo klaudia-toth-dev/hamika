@@ -5,6 +5,13 @@ import Error from "../../../components/Error";
 import { getAllOrders } from "../../../actions/orderActions";
 import { deliverOrder } from "../../../actions/orderActions";
 
+// import io from "socket.io-client";
+
+// const ENDPOINT = "http://localhost:8000";
+// const socket = io.connect(ENDPOINT);
+
+import openSocket from "socket.io-client";
+
 export default function AdminOrders() {
   const dispatch = useDispatch();
 
@@ -18,17 +25,22 @@ export default function AdminOrders() {
     dispatch(getAllOrders(pageNumber));
   }, [dispatch, pageNumber]);
 
+  const socket = openSocket("http://localhost:5000");
+
+  useEffect(() => {
+    socket.on("update order status", () => {
+      dispatch(getAllOrders(pageNumber));
+    });
+    socket.on("place order", () => {
+      dispatch(getAllOrders(pageNumber));
+    });
+  });
+
   return (
     <div>
-      {/* <h1>Orders List</h1> */}
       {loading && <Loading />}
       {error && <Error error="something went wrong" />}
-
-      {/* {pages.map((pageIndex) => {
-        <button>{pageIndex + 1}</button>;
-      })} */}
       <div className="d-flex pagination">
-        {/* <p>Page {pageNumber + 1}</p> */}
         <div>
           <button className="btn-paging " onClick={goToPrevious}>
             Previous
@@ -59,7 +71,7 @@ export default function AdminOrders() {
             <th>User Id</th>
             <th>Price</th>
             <th>Date</th>
-            {/* <th>Status</th> */}
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -72,20 +84,28 @@ export default function AdminOrders() {
                   <td>{order.userId}</td>
                   <td>{order.orderAmount}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
-                  {/* <td>
+                  <td>
                     {order.isDelivered ? (
-                      <p>Delivered</p>
+                      <p>Order delivered</p>
                     ) : (
-                      <button
-                        className="btn"
-                        onClick={() => {
-                          dispatch(deliverOrder(order._id));
+                      <select
+                        className="form-select order-status-select"
+                        // aria-label="Default select example"
+                        onChange={(e) => {
+                          console.log(e, "onChange");
+                          dispatch(deliverOrder(order._id, e.target.value));
+                          socket.emit("update order status");
                         }}
                       >
-                        Deliver
-                      </button>
+                        <option selected>{order.status}</option>
+                        <option value="Order placed">Order placed</option>
+                        <option value="Order confirmed">Order confirmed</option>
+                        <option value="Preparation">Preparation</option>
+                        <option value="Delivery">Delivery</option>
+                        <option value="Complete">Complete</option>
+                      </select>
                     )}
-                  </td> */}
+                  </td>
                 </tr>
               );
             })}

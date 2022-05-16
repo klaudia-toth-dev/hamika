@@ -51,6 +51,7 @@ import LandingNavbar from "./components/layout/LandingNavbar";
 // import Landing from "./components/layout/Landing";
 import CustomRoutes from "./components/routing/CustomRoutes";
 import CFooter from "./components/layout/CFooter";
+import NotFound from "./components/layout/NotFound";
 
 import MenuScreen from "./screens/MenuScreen";
 import CartScreen from "./screens/CartScreen";
@@ -97,6 +98,8 @@ const App = () => {
             <Route path="/login" element={<Login />} />
 
             <Route path="/auth/*" element={<CustomRoutes />} />
+
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </Fragment>
