@@ -59,7 +59,6 @@ router.post(
       });
 
       const salt = await bcrypt.genSalt(10);
-
       user.password = await bcrypt.hash(password, salt);
 
       await user.save();
@@ -148,7 +147,7 @@ router.post(
   }
 );
 
-router.post("/googleLogin", async (req, res) => {
+router.post("/googlelogin", async (req, res) => {
   try {
     const code = req.body.data;
     const profile = await googleOAuth(code);
@@ -158,7 +157,6 @@ router.post("/googleLogin", async (req, res) => {
     if (email_verified) {
       User.findOne({ email }).exec((err, user) => {
         if (user) {
-          console.log(user, "user");
           const payload = {
             user: {
               id: user.id,

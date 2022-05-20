@@ -16,7 +16,7 @@ app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
 
 // Define Routes
-app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/auth", require("./routes/authRoute"));
 app.use("/api/items/", require("./routes/itemsRoute"));
 app.use("/api/users/", require("./routes/userRoute"));
 app.use("/api/orders/", require("./routes/ordersRoute"));
@@ -34,24 +34,12 @@ io.on("connection", (socket) => {
   socket.on("update order status", () => {
     socket.emit("update order status");
     socket.broadcast.emit("update order status");
-    // socket.broadcast.emit("update");
   });
   socket.on("place order", () => {
-    console.log("place order");
     socket.emit("place order");
     socket.broadcast.emit("place order");
-    // socket.broadcast.emit("update");
   });
 });
-// io.on("connection", function (socket) {
-//   console.log("a user connected");
-//   socket.on("disconnect", function () {
-//     console.log("User Disconnected");
-//   });
-//   socket.on("example_message", function (msg) {
-//     console.log("message: " + msg);
-//   });
-// });
 io.listen(5000);
 
 // Serve static assets in production

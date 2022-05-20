@@ -53,17 +53,13 @@ export default function AdminEditItem() {
       category,
       prices: { small: smallprice, medium: mediumprice, large: largeprice },
     };
-
     dispatch(editItem(editedItem));
   }
 
   return (
     <div className="admin-edit-item-card shadow-lg rounded">
-      {/* <h1>{id}</h1> */}
-
       <div className="text-left">
         <h1>Edit Item</h1>
-
         {loading && <Loading />}
         {error && <Error error="Something went wrong" />}
         {editSuccess && <Success success="Item edited successfully" />}

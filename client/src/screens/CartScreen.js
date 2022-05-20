@@ -11,25 +11,12 @@ export default function CartScreen() {
 
   const [note, setNote] = useState("");
 
-  useEffect(() => {
-    // if (currentUser && currentUser.isAdmin) {
-    //   window.location.href = "/admin";
-    // }
-  }, []);
-
   const cartState = useSelector((state) => state.cartReducer);
   const cartItems = cartState.cartItems;
   var subtotal = cartItems.reduce((x, item) => x + item.price, 0);
   const dispatch = useDispatch();
   return (
     <div>
-      {/* <div className="d-flex">
-        <a href="/menu" className="back-to-order-link">
-          <i className="fa fa-chevron-left" aria-hidden="true">
-            <span> back to order</span>
-          </i>
-        </a>
-      </div> */}
       <div className="cart-screen">
         <div className="row justify-content-center">
           <div className="col-md-12">

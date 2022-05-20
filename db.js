@@ -1,11 +1,5 @@
 const mongoose = require("mongoose");
-
 require("dotenv").config();
-
-// var mongoURL =
-//   "mongodb+srv://clautoth:mnbASDpoi123@cluster0.hklbt.mongodb.net/hamika";
-
-// mongoose.connect(mongoURL, { useUnifiedTopology: true, useNewUrlParser: true });
 
 mongoose.connect(process.env.MONGODB_URL, {
   useUnifiedTopology: true,

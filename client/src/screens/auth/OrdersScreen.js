@@ -9,27 +9,15 @@ import openSocket from "socket.io-client";
 let socket;
 
 const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
-  // const userState = useSelector((state) => state.auth);
-  // const { user } = userState;
-
-  // const authState = useSelector((state) => state.auth);
-  // console.log(authState, "authState");
-
   const dispatch = useDispatch();
 
   const orderState = useSelector((state) => state.getUserOrdersReducer);
   const { orders, error, loading } = orderState;
 
-  // console.log(orderState, "orderState");
-
   socket = openSocket("http://localhost:5000");
   useEffect(() => {
-    // if (user && user.isAdmin) {
-    //   window.location.href = "/admin";
-    // }
     dispatch(getUserOrders());
   }, [dispatch]);
-  // }, [user]);
 
   useEffect(() => {
     socket.on("update order status", () => {
@@ -58,8 +46,8 @@ const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
                         return (
                           <div>
                             <p>
-                              <b>{item.name}</b> - {item.portion} *{" "}
-                              {item.quantity} * {item.price}
+                              {item.name} - {item.portion} * {item.quantity} *{" "}
+                              {item.prices[0][item.portion]}
                             </p>
                           </div>
                         );
@@ -78,12 +66,10 @@ const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
                         <b>Price: {order.orderAmount}</b>
                       </p>
                       <p>Date: {order.createdAt.substring(0, 10)}</p>
-                      {/* <p>Order Id: {order._id}</p> */}
                       <p>{order.note && <span>Comment: {order.note}</span>}</p>
                     </div>
                     <div className="text-left w-100 m-1">
                       <h3>Order Status</h3>
-                      {/* <p>{order.status}</p> */}
                       {}
                       <p
                         className={`order-stat-item  ${
@@ -144,10 +130,10 @@ const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
                       <h3>Items</h3>
                       {order.orderItems.map((item) => {
                         return (
-                          <div>
+                          <div key={item.id}>
                             <p>
-                              {item.name} - {item.portion} * {item.quantity} *
-                              {item.price}
+                              {item.name} - {item.portion} * {item.quantity} *{" "}
+                              {item.prices[0][item.portion]}
                             </p>
                           </div>
                         );
@@ -166,8 +152,6 @@ const OrdersScreen = ({ auth: { isAuthenticated, user }, logout }) => {
                         <b>Price: {order.orderAmount}</b>
                       </p>
                       <p>Date: {order.createdAt.substring(0, 10)}</p>
-                      {/* <p>Order Id: {order._id}</p> */}
-                      <p>Order Status: {order.isDelivered.toString()}</p>
                       <p>{order.note && <span>Comment: {order.note}</span>}</p>
                     </div>
                   </div>

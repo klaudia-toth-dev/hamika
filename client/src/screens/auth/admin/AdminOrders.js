@@ -5,11 +5,6 @@ import Error from "../../../components/Error";
 import { getAllOrders } from "../../../actions/orderActions";
 import { deliverOrder } from "../../../actions/orderActions";
 
-// import io from "socket.io-client";
-
-// const ENDPOINT = "http://localhost:8000";
-// const socket = io.connect(ENDPOINT);
-
 import openSocket from "socket.io-client";
 
 export default function AdminOrders() {
@@ -90,9 +85,7 @@ export default function AdminOrders() {
                     ) : (
                       <select
                         className="form-select order-status-select"
-                        // aria-label="Default select example"
                         onChange={(e) => {
-                          console.log(e, "onChange");
                           dispatch(deliverOrder(order._id, e.target.value));
                           socket.emit("update order status");
                         }}

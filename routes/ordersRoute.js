@@ -71,7 +71,6 @@ router.get("/getallorders", auth, async (req, res) => {
     const PAGE_SIZE = 10;
     const page = parseInt(req.query.page || "0");
     const total = await Order.countDocuments({});
-    // console.log(Math.ceil(total / PAGE_SIZE));
     const orders = await Order.find({})
       .limit(PAGE_SIZE)
       .skip(PAGE_SIZE * page);
@@ -82,7 +81,7 @@ router.get("/getallorders", auth, async (req, res) => {
 });
 module.exports = router;
 
-router.post("/deliverorder", async (req, res) => {
+router.post("/deliverorder", auth, async (req, res) => {
   const orderId = req.body.orderId;
   const orderStatus = req.body.orderStatus;
   try {

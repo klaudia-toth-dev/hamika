@@ -1,54 +1,8 @@
-// // import logo from "./logo.svg";
-
-// import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-// import LandingNavbar from "./components/LandingNavbar";
-// import CFooter from "./components/CFooter";
-// import Navbar from "./components/Navbar";
-// import HomeScreen from "./screens/HomeScreen";
-// import CartScreen from "./screens/CartScreen";
-// import RegisterScreen from "./screens/RegisterScreen";
-// import LoginScreen from "./screens/LoginScreen";
-// import OrdersScreen from "./screens/OrdersScreen";
-// import AdminScreen from "./screens/AdminScreen";
-// import ContactScreen from "./screens/ContactScreen";
-// import WelcomeScreen from "./screens/WelcomeScreen";
-
-// function App() {
-//   const pathname = window.location.pathname;
-//   return (
-//     <div className="App">
-//       {pathname === "/" && <LandingNavbar />}
-//       {pathname !== "/" && <Navbar />}
-//       <div className="container app-content">
-//         <Router>
-//           <Routes>
-//             <Route path="/" element={<WelcomeScreen />} />
-//             <Route path="/menu" element={<HomeScreen />} />
-//             <Route path="/cart" element={<CartScreen />} />
-//             <Route path="/register" element={<RegisterScreen />} />
-//             <Route path="/login" element={<LoginScreen />} />
-//             <Route path="/orders" element={<OrdersScreen />} />
-//             <Route path="/admin/*" element={<AdminScreen />} />
-//             {/* <Route path="/contact" element={<ContactScreen />} /> */}
-//           </Routes>
-//         </Router>
-//       </div>
-//       <CFooter />
-//     </div>
-//   );
-// }
-
-import React, { Fragment, useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import React, { Fragment, useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
 import LandingNavbar from "./components/layout/LandingNavbar";
-// import Landing from "./components/layout/Landing";
 import CustomRoutes from "./components/routing/CustomRoutes";
 import CFooter from "./components/layout/CFooter";
 import NotFound from "./components/layout/NotFound";
@@ -79,7 +33,6 @@ const App = () => {
   const pathName = location.pathname;
 
   useEffect(() => {
-    console.log("loaduser");
     store.dispatch(loadUser());
   }, []);
 
@@ -93,12 +46,9 @@ const App = () => {
             <Route path="/" element={<WelcomeScreen />} />
             <Route path="/menu" element={<MenuScreen />} />
             <Route path="/cart" element={<CartScreen />} />
-
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-
             <Route path="/auth/*" element={<CustomRoutes />} />
-
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

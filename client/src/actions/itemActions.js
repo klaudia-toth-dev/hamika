@@ -11,6 +11,7 @@ export const getAllItems = () => async (dispatch) => {
     dispatch({ type: "GET_ITEMS_FAILED", payload: error });
   }
 };
+
 export const getItemById = (itemid) => async (dispatch) => {
   dispatch({ type: "GET_ITEMBYID_REQUEST" });
 
@@ -63,7 +64,6 @@ export const deleteItem = (itemid) => async (dispatch) => {
 export const filterItems = (searchKey, category) => async (dispatch) => {
   var filteredItems;
   dispatch({ type: "GET_ITEMS_REQUEST" });
-
   try {
     const response = await axios.get("/api/items/getallitems");
     filteredItems = await response.data.filter((item) =>
@@ -74,9 +74,6 @@ export const filterItems = (searchKey, category) => async (dispatch) => {
         (item) => item.category.toLowerCase() === category.toLowerCase()
       );
     }
-    // console.log(response, "response");
-    console.log("filteredItems", filteredItems);
-    // dispatch({ type: "GET_ITEMS_SUCCESS", payload: response.data });
     dispatch({ type: "GET_ITEMS_SUCCESS", payload: filteredItems });
   } catch (error) {
     dispatch({ type: "GET_ITEMS_FAILED", payload: error });

@@ -3,14 +3,11 @@ import setAuthToken from "../utils/setAuthToken";
 
 // Load User
 export const loadUser = () => async (dispatch) => {
-  console.log("loadUser");
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
-
   try {
     const res = await axios.get("/api/auth");
-
     dispatch({
       type: "USER_LOADED",
       payload: res.data,
@@ -86,11 +83,8 @@ export const login = (email, password) => async (dispatch) => {
 // Login User
 export const googleLogin = (data) => async (dispatch) => {
   dispatch({ type: "GOOGLE_LOGIN_REQUEST" });
-  console.log("GOOGLE_LOGIN_REQUEST", data);
-
   try {
     const res = await axios.post("/api/users/googlelogin", { data });
-    console.log("GOOGLE_LOGIN_SUCCESS");
     dispatch({
       type: "GOOGLE_LOGIN_SUCCESS",
       payload: res.data,
@@ -99,8 +93,6 @@ export const googleLogin = (data) => async (dispatch) => {
     dispatch(loadUser());
   } catch (error) {
     const errors = error.response.data.errors;
-
-    console.log(errors, error, "HALOOO");
 
     if (errors) {
       errors.forEach((err) =>

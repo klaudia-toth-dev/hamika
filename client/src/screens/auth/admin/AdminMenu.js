@@ -13,10 +13,9 @@ export default function AdminMenu() {
 
   useEffect(() => {
     dispatch(getAllItems());
-  }, []);
+  }, [dispatch]);
   return (
     <div className="admin-menu">
-      {/* <h1>Items List</h1> */}
       {loading && <Loading />}
       {error && <Error error="Something went wrong" />}
       <table className="table styled-table">

@@ -18,13 +18,6 @@ export default function CheckOut({ subtotal, note }) {
 
   const socket = openSocket("http://localhost:5000");
 
-  useEffect(() => {
-    // if (user && user.isAdmin) {
-    //   window.location.href = "/admin";
-    // }
-  }, []);
-  // }, [user]);
-
   return (
     <div>
       {loading && <Loading />}
@@ -47,8 +40,6 @@ export default function CheckOut({ subtotal, note }) {
 
   function tokenHandler(token) {
     dispatch(placeOrder(token, subtotal, note, navigate));
-    console.log("before socket emit");
     socket.emit("place order");
-    console.log("before socket emit");
   }
 }
